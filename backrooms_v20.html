@@ -1,0 +1,2140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Backrooms Wiki · 抖音</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--bg4:#222;
+  --yellow:#f5d76e;--yellow2:#e8c84a;--yellow-dim:rgba(245,215,110,.15);
+  --green:#4ade80;--orange:#fb923c;--red:#ef4444;--blue:#60a5fa;--purple:#a78bfa;
+  --text:#e5e5e5;--text2:#a3a3a3;--text3:#737373;
+  --border:#2a2a2a;--border2:#333;
+  --radius:8px;--radius-lg:12px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"SF Mono","Cascadia Code","Consolas","Liberation Mono",monospace;
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+a{color:var(--yellow);text-decoration:none}a:hover{text-decoration:underline}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ===== BADGES ===== */
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600}
+.badge-core{background:rgba(245,215,110,.15);color:var(--yellow)}
+.badge-consensus{background:rgba(96,165,250,.15);color:var(--blue)}
+.badge-creator{background:rgba(167,139,250,.15);color:var(--purple)}
+
+/* ===== CRT SCANLINE ===== */
+@media(min-width:769px) and (prefers-reduced-motion:no-preference){
+  body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:9999}
+}
+
+/* ===== HEADER ===== */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}
+.site-header.hidden{transform:translateY(-100%)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:700;color:var(--yellow);cursor:pointer;white-space:nowrap}
+.logo span{font-size:12px;color:var(--text3);font-weight:400}
+.header-search{flex:1;max-width:400px;position:relative}
+.header-search input{width:100%;padding:8px 12px 8px 36px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;color:var(--text);font-size:14px;outline:none;transition:border-color .2s}
+.header-search input:focus{border-color:var(--yellow)}
+.header-search::before{content:'🔍';position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px}
+.nav-tabs{display:flex;gap:4px}
+.nav-tab{padding:6px 16px;border-radius:16px;font-size:14px;color:var(--text2);cursor:pointer;transition:all .2s;border:1px solid transparent;white-space:nowrap}
+.nav-tab:hover{color:var(--text);background:var(--bg3)}
+.nav-tab.active{color:var(--yellow);background:var(--yellow-dim);border-color:rgba(245,215,110,.3)}
+.search-results{position:absolute;top:100%;left:0;right:0;margin-top:4px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);max-height:300px;overflow-y:auto;display:none;z-index:110}
+.search-results.visible{display:block}
+.search-item{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer;font-size:14px;color:var(--text2);transition:background .15s}
+.search-item:hover{background:var(--bg3)}
+
+/* ============================== */
+/* LEVEL 1: GAME-LIKE IMMERSIVE  */
+/* ============================== */
+#level1{min-height:100vh;position:relative}
+
+/* Phase: The Fall */
+#phase-fall{position:fixed;inset:0;z-index:500;background:#000;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#phase-fall .fall-text{font-family:var(--mono);font-size:15px;color:var(--text2);max-width:500px;padding:20px;line-height:2}
+#phase-fall .fall-line{opacity:0;transition:opacity .4s}
+#phase-fall .fall-line.visible{opacity:1}
+.typewriter-cursor{display:inline-block;width:2px;height:1.2em;background:var(--yellow);animation:blink .7s step-end infinite;vertical-align:text-bottom;margin-left:2px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.fall-hint{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);font-size:13px;color:var(--text3);font-family:var(--mono);opacity:0;transition:opacity .5s}
+.fall-hint.visible{opacity:.6}
+
+/* Phase: Terminal Boot */
+#phase-boot{position:fixed;inset:0;z-index:500;background:#000;display:none;padding:40px;overflow:hidden}
+.terminal-block{font-family:var(--mono);color:var(--green);font-size:13px;line-height:1.8;max-width:600px;margin:0 auto}
+.terminal-block .line{opacity:0;transition:opacity .3s}.terminal-block .line.visible{opacity:1}
+.terminal-progress{display:inline-block;width:180px;height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;vertical-align:middle}
+.terminal-progress .fill{height:100%;background:var(--green);border-radius:4px;width:0;transition:width 1.5s ease}
+
+/* Phase: M.E.G. Transmission */
+#phase-transmission{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.pda-container{max-width:520px;width:100%;background:rgba(10,10,10,.98);border:1px solid var(--yellow);border-radius:var(--radius-lg);box-shadow:0 0 40px rgba(245,215,110,.08);overflow:hidden}
+.pda-header{background:rgba(245,215,110,.08);padding:12px 16px;font-family:var(--mono);font-size:11px;color:var(--yellow);border-bottom:1px solid rgba(245,215,110,.2);letter-spacing:1px;text-transform:uppercase}
+.pda-meta{padding:8px 16px;font-family:var(--mono);font-size:11px;color:var(--text3);border-bottom:1px solid var(--border);display:flex;gap:16px;flex-wrap:wrap}
+.pda-body{padding:20px;font-size:14px;line-height:1.9;color:var(--text2)}
+.pda-body .warning-item{display:flex;align-items:flex-start;gap:8px;margin:6px 0;padding:8px 12px;background:rgba(239,68,68,.08);border-left:2px solid var(--red);border-radius:0 var(--radius) var(--radius) 0;font-size:13px}
+.pda-body .warning-item .icon{color:var(--red);flex-shrink:0}
+.pda-footer{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
+.pda-btn{padding:8px 20px;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.pda-btn.primary{background:var(--yellow);color:#000}.pda-btn.primary:hover{background:var(--yellow2)}
+.pda-btn.ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}.pda-btn.ghost:hover{border-color:var(--text3);color:var(--text)}
+.pda-signature{text-align:right;margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--yellow);opacity:.7}
+
+/* Phase: Corridor (main exploration) */
+#phase-corridor{display:none;min-height:100vh;position:relative}
+
+/* HUD */
+.hud{position:fixed;z-index:50;pointer-events:none}
+.hud>*{pointer-events:auto}
+.hud-top-left{top:70px;left:16px;font-family:var(--mono);font-size:11px;color:var(--yellow);opacity:.6;letter-spacing:1px}
+.hud-top-right{top:70px;right:16px;display:flex;gap:8px}
+.hud-btn{width:32px;height:32px;border-radius:50%;background:rgba(26,26,26,.8);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--text2);transition:all .2s}
+.hud-btn:hover{background:var(--bg4);color:var(--text)}
+.hud-bottom{bottom:20px;left:50%;transform:translateX(-50%);text-align:center}
+.hud-hint{font-family:var(--mono);font-size:12px;color:var(--text3);opacity:.5;animation:hudPulse 3s ease-in-out infinite}
+@keyframes hudPulse{0%,100%{opacity:.5}50%{opacity:.8}}
+.hud-enter-l2{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:rgba(245,215,110,.1);border:1px solid rgba(245,215,110,.3);border-radius:20px;color:var(--yellow);font-size:13px;font-family:var(--mono);cursor:pointer;margin-top:8px;transition:all .2s}
+.hud-enter-l2:hover{background:rgba(245,215,110,.2)}
+
+/* Corridor viewport */
+.corridor-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.corridor-wall-l,.corridor-wall-r{position:absolute;top:0;bottom:0;width:15%;background:linear-gradient(to bottom,#1a1408,#0d0a04)}
+.corridor-wall-l{left:0;border-right:1px solid rgba(245,215,110,.05)}
+.corridor-wall-r{right:0;border-left:1px solid rgba(245,215,110,.05)}
+.corridor-ceiling{position:absolute;top:0;left:0;right:0;height:40px;background:linear-gradient(180deg,#0a0a0a,transparent)}
+.fluoro-light{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:120px;height:4px;background:rgba(245,215,110,.5);box-shadow:0 0 30px rgba(245,215,110,.2);border-radius:2px;animation:flicker 5s ease-in-out infinite}
+@keyframes flicker{0%,100%{opacity:.85}5%{opacity:.3}6%{opacity:.9}50%{opacity:1}51%{opacity:.35}52%{opacity:1}}
+
+/* Shadow figure */
+.shadow-figure{position:fixed;bottom:25%;left:50%;transform:translateX(-50%);width:30px;height:80px;background:rgba(0,0,0,.9);clip-path:polygon(35% 0%,65% 0%,70% 25%,80% 25%,80% 50%,65% 50%,65% 100%,35% 100%,35% 50%,20% 50%,20% 25%,30% 25%);opacity:.08;animation:shadowSway 8s ease-in-out infinite;pointer-events:none;z-index:1}
+@keyframes shadowSway{0%,100%{transform:translateX(-50%) scaleY(1)}50%{transform:translateX(-48%) scaleY(1.03)}}
+
+/* Corridor content sections */
+.corridor-section{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:0 20px}
+.corridor-zone{margin-bottom:48px;animation:fadeUp .5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.zone-label{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:8px 12px;background:rgba(10,10,10,.7);border-left:3px solid var(--yellow);font-family:var(--mono);font-size:12px;color:var(--yellow);letter-spacing:1px;text-transform:uppercase;border-radius:0 var(--radius) var(--radius) 0}
+.zone-label .zone-desc{font-size:11px;color:var(--text3);text-transform:none;letter-spacing:0;margin-left:auto}
+
+/* Wanted poster style (entities) */
+.wanted-poster{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.wanted-poster:hover{border-color:var(--red);box-shadow:0 0 20px rgba(239,68,68,.1);transform:translateY(-2px)}
+.wanted-poster::before{content:'⚠ WARNING';position:absolute;top:8px;right:8px;font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:2px;opacity:.6}
+.wanted-poster .wp-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.wanted-poster .wp-icon{font-size:32px;filter:grayscale(.3)}
+.wanted-poster .wp-name{font-size:16px;font-weight:700;color:var(--text)}
+.wanted-poster .wp-sub{font-size:12px;color:var(--text3)}
+.wanted-poster .wp-threat{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-top:4px}
+.wanted-poster .wp-summary{font-size:13px;color:var(--text2);margin-top:8px;line-height:1.5}
+
+/* Supply crate style (items) */
+.supply-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .2s}
+.supply-item:hover{border-color:var(--blue);background:var(--bg3)}
+.supply-item .si-icon{font-size:28px;flex-shrink:0}
+.supply-item .si-name{font-size:14px;font-weight:600;color:var(--text)}
+.supply-item .si-sub{font-size:12px;color:var(--text3)}
+
+/* Radio intercept style (groups) */
+.radio-msg{padding:14px;background:rgba(10,10,10,.8);border:1px dashed var(--border);border-radius:var(--radius);cursor:pointer;transition:all .2s;font-family:var(--mono)}
+.radio-msg:hover{border-color:var(--green);background:rgba(74,222,128,.03)}
+.radio-msg .rm-freq{font-size:10px;color:var(--green);letter-spacing:2px;margin-bottom:6px}
+.radio-msg .rm-name{font-size:15px;color:var(--text);margin-bottom:4px;font-family:var(--font)}
+.radio-msg .rm-text{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* Level/report cards for corridor */
+.report-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .25s}
+.report-card:hover{border-color:var(--yellow);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.rc-top{height:80px;display:flex;align-items:center;justify-content:center;font-size:36px;position:relative;overflow:hidden}
+.rc-top .rc-bg{position:absolute;inset:0;opacity:.15}
+.rc-top.theme-indoor .rc-bg{background:radial-gradient(circle,rgba(245,215,110,.2),transparent 70%)}
+.rc-top.theme-industrial .rc-bg{background:radial-gradient(circle,rgba(251,146,60,.2),transparent 70%)}
+.rc-top.theme-nature .rc-bg{background:radial-gradient(circle,rgba(74,222,128,.2),transparent 70%)}
+.rc-top.theme-safe .rc-bg{background:radial-gradient(circle,rgba(96,165,250,.2),transparent 70%)}
+.rc-top.theme-danger .rc-bg{background:radial-gradient(circle,rgba(239,68,68,.2),transparent 70%)}
+.rc-danger{position:absolute;top:6px;right:6px;padding:2px 6px;border-radius:6px;font-size:10px;font-weight:700}
+.rc-body{padding:10px 12px}
+.rc-body h4{font-size:14px;color:var(--text);margin-bottom:2px}
+.rc-body .rc-sub{font-size:12px;color:var(--text3);margin-bottom:6px}
+.rc-body .rc-summary{font-size:12px;color:var(--text2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.5}
+.rc-meta{display:flex;gap:10px;padding:6px 12px 8px;font-size:11px;color:var(--text3)}
+
+/* Grid layouts for corridor */
+.reports-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.posters-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.supply-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.radio-list{display:grid;grid-template-columns:1fr;gap:10px;max-width:500px}
+
+/* Category filter as HUD channel */
+.channel-bar{position:sticky;top:57px;z-index:40;background:rgba(10,10,10,.9);backdrop-filter:blur(8px);padding:10px 0;border-bottom:1px solid var(--border)}
+.channel-inner{max-width:900px;margin:0 auto;padding:0 20px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.channel-inner::-webkit-scrollbar{display:none}
+.channel-btn{padding:6px 14px;border-radius:14px;font-size:13px;font-family:var(--mono);color:var(--text3);background:transparent;border:1px solid var(--border);cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.channel-btn:hover{color:var(--text);border-color:var(--text3)}
+.channel-btn.active{color:var(--yellow);background:var(--yellow-dim);border-color:rgba(245,215,110,.3)}
+
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+@media(min-width:769px){.modal-overlay.open{align-items:center}}
+.modal-sheet{background:var(--bg2);border-radius:var(--radius-lg) var(--radius-lg) 0 0;width:100%;max-width:640px;max-height:85vh;overflow-y:auto;padding:0;position:relative;animation:slideUp .3s ease}
+@media(min-width:769px){.modal-sheet{border-radius:var(--radius-lg);max-height:80vh}}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:sticky;top:0;float:right;width:32px;height:32px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text2);z-index:1;margin:12px 12px 0 0}
+.modal-close:hover{color:var(--text);background:var(--bg4)}
+/* In-world modal style */
+.modal-sheet.in-world .mw-stamp{font-family:var(--mono);font-size:10px;color:var(--yellow);letter-spacing:1px;padding:16px 20px 0;opacity:.6}
+.modal-sheet.in-world .mw-header{display:flex;align-items:center;gap:16px;padding:12px 20px}
+.modal-sheet.in-world .mw-icon{font-size:48px}
+.modal-sheet.in-world .mw-name{font-size:22px;font-weight:700;color:var(--text)}
+.modal-sheet.in-world .mw-sub{font-size:14px;color:var(--text3)}
+.modal-sheet.in-world .mw-badges{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.modal-sheet.in-world .mw-summary{margin:0 20px 16px;padding:12px;background:var(--bg3);border-radius:var(--radius);border-left:3px solid var(--yellow);font-size:14px;color:var(--text2);line-height:1.7}
+.modal-sheet.in-world .mw-section{padding:0 20px 16px}
+.modal-sheet.in-world .mw-section h4{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.radar-bars{display:flex;flex-direction:column;gap:6px}
+.radar-bar{display:flex;align-items:center;gap:8px;font-size:13px}
+.radar-bar .label{width:60px;color:var(--text3);text-align:right;flex-shrink:0}
+.radar-bar .track{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.radar-bar .fill{height:100%;border-radius:3px;transition:width .5s ease}
+.radar-bar .val{width:20px;font-size:12px;color:var(--text3)}
+.mw-desc{padding:0 20px 16px;font-size:14px;color:var(--text2);line-height:1.8}
+.mw-desc h2{font-size:16px;color:var(--yellow);margin:12px 0 8px;border-bottom:1px solid var(--border);padding-bottom:4px}
+.mw-desc ul{padding-left:20px;margin:8px 0}.mw-desc li{margin-bottom:4px}
+.conn-section{padding:0 20px 16px}
+.conn-section h4{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.conn-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;margin:4px;background:var(--bg3);border:1px solid var(--border);border-radius:16px;font-size:13px;color:var(--yellow);cursor:pointer;transition:all .2s}
+.conn-chip:hover{background:var(--yellow-dim);border-color:rgba(245,215,110,.3)}
+.mw-footer{padding:12px 20px 16px;font-family:var(--mono);font-size:11px;color:var(--text3);border-top:1px solid var(--border);opacity:.5}
+
+/* ============================== */
+/* LEVEL 2: WIKI WORKSPACE       */
+/* ============================== */
+#level2{display:none;min-height:100vh}
+.l2-layout{display:flex;min-height:calc(100vh - 57px)}
+.sidebar{width:240px;background:var(--bg2);border-right:1px solid var(--border);padding:16px 0;position:sticky;top:57px;height:calc(100vh - 57px);overflow-y:auto;flex-shrink:0}
+.sidebar-section{padding:0 12px;margin-bottom:16px}
+.sidebar-section h5{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;padding:0 8px}
+.sidebar-item{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:var(--radius);font-size:14px;color:var(--text2);cursor:pointer;transition:all .15s}
+.sidebar-item:hover{background:var(--bg3);color:var(--text)}
+.sidebar-item.active{background:var(--yellow-dim);color:var(--yellow)}
+.sidebar-item .emoji{width:20px;text-align:center;flex-shrink:0}
+.sidebar-count{margin-left:auto;font-size:12px;color:var(--text3)}
+.sidebar-count.alert{color:var(--orange);font-weight:600}
+.l2-main{flex:1;padding:24px;overflow-y:auto}
+
+/* L2 common */
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;margin-bottom:16px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text2);font-size:14px;cursor:pointer;transition:all .2s}
+.back-btn:hover{color:var(--text);background:var(--bg4)}
+.page-title{font-size:24px;font-weight:700;color:var(--text);margin-bottom:4px}
+.page-sub{font-size:14px;color:var(--text3);margin-bottom:24px}
+.stat-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:28px}
+.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;text-align:center;cursor:pointer;transition:all .2s}
+.stat-card:hover{border-color:var(--yellow)}
+.stat-card .sc-icon{font-size:24px;margin-bottom:4px}
+.stat-card .sc-num{font-size:22px;font-weight:700;color:var(--yellow)}
+.stat-card .sc-label{font-size:12px;color:var(--text3)}
+
+/* Data table */
+.data-table{width:100%;border-collapse:collapse;font-size:14px}
+.data-table th{text-align:left;padding:10px 12px;background:var(--bg3);color:var(--text3);font-size:12px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border);position:sticky;top:0}
+.data-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2)}
+.data-table tr:hover td{background:var(--bg3)}
+.data-table .name-cell{display:flex;align-items:center;gap:8px;color:var(--text);font-weight:500;cursor:pointer}
+.data-table .name-cell:hover{color:var(--yellow)}
+
+/* Theme zones */
+.theme-zone{margin-bottom:28px}
+.zone-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.zone-header h3{font-size:16px;color:var(--text)}
+.zone-header .zc{font-size:13px;color:var(--text3)}
+.zone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.zone-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .2s}
+.zone-card:hover{border-color:var(--yellow);transform:translateY(-1px)}
+.zc-top{height:60px;display:flex;align-items:center;justify-content:center;font-size:28px;position:relative}
+.zc-top .zc-bg{position:absolute;inset:0;opacity:.15}
+.zc-top.theme-indoor .zc-bg{background:radial-gradient(circle,rgba(245,215,110,.2),transparent 70%)}
+.zc-top.theme-industrial .zc-bg{background:radial-gradient(circle,rgba(251,146,60,.2),transparent 70%)}
+.zc-top.theme-nature .zc-bg{background:radial-gradient(circle,rgba(74,222,128,.2),transparent 70%)}
+.zc-top.theme-safe .zc-bg{background:radial-gradient(circle,rgba(96,165,250,.2),transparent 70%)}
+.zc-top.theme-danger .zc-bg{background:radial-gradient(circle,rgba(239,68,68,.2),transparent 70%)}
+.zc-body{padding:8px 10px 10px}
+.zc-body h4{font-size:13px;color:var(--text)}
+.zc-body .zc-sub{font-size:11px;color:var(--text3)}
+
+/* ===== PROFILE PAGE ===== */
+.profile-header{display:flex;align-items:center;gap:20px;padding:20px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:24px}
+.profile-avatar{font-size:48px;width:64px;height:64px;display:flex;align-items:center;justify-content:center;background:var(--bg4);border-radius:50%;flex-shrink:0}
+.profile-info h2{font-size:20px;color:var(--text);margin-bottom:2px}
+.profile-info .level-badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:12px;font-weight:600;margin-bottom:6px}
+.level-badge.lv0{background:rgba(115,115,115,.2);color:var(--text3)}
+.level-badge.lv1{background:rgba(74,222,128,.15);color:var(--green)}
+.level-badge.lv2{background:rgba(96,165,250,.15);color:var(--blue)}
+.level-badge.lv3{background:rgba(245,215,110,.15);color:var(--yellow)}
+.progress-track{width:200px;height:6px;background:var(--bg);border-radius:3px;overflow:hidden;margin-bottom:4px}
+.progress-track .fill{height:100%;background:var(--blue);border-radius:3px}
+.profile-info .next-req{font-size:12px;color:var(--text3)}
+.level-roadmap{display:flex;align-items:center;gap:0;margin-bottom:24px;padding:16px;background:var(--bg3);border-radius:var(--radius);overflow-x:auto}
+.roadmap-step{display:flex;align-items:center;gap:0;white-space:nowrap}
+.roadmap-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.roadmap-dot.done{background:var(--yellow);color:#000}
+.roadmap-dot.current{background:var(--blue);color:#fff;box-shadow:0 0 8px rgba(96,165,250,.4)}
+.roadmap-dot.future{background:var(--bg4);color:var(--text3);border:1px dashed var(--border)}
+.roadmap-line{width:40px;height:2px;background:var(--border);flex-shrink:0}
+.roadmap-line.done{background:var(--yellow)}
+.roadmap-label{font-size:10px;color:var(--text3);text-align:center;margin-top:4px;position:absolute;top:32px;left:50%;transform:translateX(-50%);width:60px}
+.roadmap-node{position:relative;display:flex;flex-direction:column;align-items:center}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.stat-tile{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center}
+.stat-tile .st-num{font-size:20px;font-weight:700;color:var(--yellow)}
+.stat-tile .st-label{font-size:12px;color:var(--text3)}
+.achievement-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:24px}
+.ach-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:10px;text-align:center;transition:all .2s}
+.ach-card.locked{opacity:.4;filter:grayscale(1)}
+.ach-card .ach-icon{font-size:24px;margin-bottom:4px}
+.ach-card .ach-name{font-size:12px;color:var(--text);font-weight:500}
+.ach-card .ach-desc{font-size:10px;color:var(--text3);margin-top:2px}
+
+/* ===== ADMIN PAGE ===== */
+.admin-banner{padding:12px 16px;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2);border-radius:var(--radius);margin-bottom:20px;font-size:13px;color:var(--orange);display:flex;align-items:center;gap:8px}
+.org-tree{margin-bottom:24px}
+.org-tier{margin-bottom:12px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius)}
+.org-tier-label{font-size:12px;color:var(--text3);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.org-members{display:flex;flex-wrap:wrap;gap:8px}
+.org-member{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--bg4);border-radius:20px;font-size:13px;color:var(--text)}
+.defense-lines{margin-bottom:24px}
+.defense-line{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px}
+.dl-num{width:24px;height:24px;border-radius:50%;background:var(--green);color:#000;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dl-name{font-size:14px;color:var(--text);flex:1}
+.dl-status{font-size:12px;color:var(--green);display:flex;align-items:center;gap:4px}
+.dl-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green)}
+.dl-metric{font-size:12px;color:var(--text3);white-space:nowrap}
+
+/* ===== AUDIT PAGE ===== */
+.audit-filters{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.audit-group{margin-bottom:20px}
+.audit-group-title{font-size:12px;font-weight:600;color:var(--text3);padding:4px 0;margin-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.audit-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:8px;border-left:3px solid var(--border);transition:all .2s}
+.audit-card.priority-high{border-left-color:var(--red)}
+.audit-card.priority-low{border-left-color:var(--blue)}
+.ac-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px}
+.ac-meta{font-size:12px;color:var(--text3);display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.ac-status{display:inline-block;padding:2px 8px;border-radius:8px;font-size:11px;font-weight:600}
+.ac-status.pending{background:rgba(163,163,163,.15);color:var(--text3)}
+.ac-status.in_review{background:rgba(245,215,110,.15);color:var(--yellow)}
+.ac-status.approved{background:rgba(74,222,128,.15);color:var(--green)}
+.ac-status.rejected{background:rgba(239,68,68,.15);color:var(--red)}
+.ac-actions{display:flex;gap:6px;margin-top:8px}
+.ac-btn{padding:5px 14px;border-radius:var(--radius);font-size:13px;cursor:pointer;border:1px solid var(--border);background:var(--bg4);color:var(--text2);transition:all .2s}
+.ac-btn:hover{border-color:var(--text3)}
+.ac-btn.approve{border-color:rgba(74,222,128,.3);color:var(--green)}.ac-btn.approve:hover{background:rgba(74,222,128,.1)}
+.ac-btn.reject{border-color:rgba(239,68,68,.3);color:var(--red)}.ac-btn.reject:hover{background:rgba(239,68,68,.1)}
+
+/* ===== LEADERBOARD ===== */
+.podium{display:flex;justify-content:center;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.podium-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;text-align:center;width:160px;transition:all .2s}
+.podium-card.first{border-color:rgba(245,215,110,.3);box-shadow:0 0 20px rgba(245,215,110,.08)}
+.pc-badge{font-size:28px;margin-bottom:4px}
+.pc-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px}
+.pc-stats{font-size:12px;color:var(--text3)}
+.lb-my-row{background:var(--yellow-dim)!important}
+.lb-my-row td{color:var(--yellow)!important;font-weight:600}
+
+/* ===== DETAIL PAGE ===== */
+.detail-page{max-width:800px}
+.detail-hero{display:flex;align-items:center;gap:20px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.detail-hero .icon{font-size:64px}
+.detail-hero h1{font-size:28px;color:var(--text)}
+.detail-hero .sub{font-size:15px;color:var(--text3)}
+.detail-info{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:24px}
+.info-row{display:flex;justify-content:space-between;padding:6px 0;font-size:14px;border-bottom:1px solid var(--border)}
+.info-row:last-child{border-bottom:none}
+.info-row .k{color:var(--text3)}.info-row .v{color:var(--text);font-weight:500}
+.detail-content{font-size:15px;color:var(--text2);line-height:1.8}
+.detail-content h2{font-size:18px;color:var(--yellow);margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.detail-content ul{padding-left:24px;margin:8px 0}.detail-content li{margin-bottom:6px}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);padding:10px 20px;background:var(--bg3);border:1px solid var(--green);border-radius:var(--radius);color:var(--green);font-size:14px;z-index:300;animation:toastIn .3s ease}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* ===== MOBILE ===== */
+.mobile-nav{display:none}
+@media(max-width:768px){
+  .header-search{display:none}
+  .sidebar{display:none}
+  .l2-layout{flex-direction:column}
+  .l2-main{padding:16px}
+  .reports-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .posters-grid{grid-template-columns:1fr;gap:8px}
+  .supply-list{grid-template-columns:1fr}
+  .zone-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .achievement-grid{grid-template-columns:repeat(3,1fr)}
+  .profile-header{flex-direction:column;text-align:center;gap:12px}
+  .progress-track{margin:0 auto 4px}
+  .podium{flex-direction:column;align-items:center}
+  .modal-sheet{padding:0}
+  .shadow-figure{display:none}
+  .corridor-wall-l,.corridor-wall-r{width:8%}
+  .mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(10,10,10,.95);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:6px 0 env(safe-area-inset-bottom,6px)}
+  .mn-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px;font-size:10px;color:var(--text3);cursor:pointer}
+  .mn-item.active{color:var(--yellow)}
+  .mn-item .mn-icon{font-size:18px}
+  #level2{padding-bottom:60px}
+}
+
+/* ===== COMMAND TERMINAL (v12) ===== */
+.cmd-terminal{max-width:100%}
+.cmd-status-bar{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 18px;margin-bottom:16px}
+.cmd-status-line{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.cmd-status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(74,222,128,.4);animation:cmd-pulse 2s ease infinite}
+@keyframes cmd-pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.cmd-status-label{font-family:var(--mono);font-size:13px;color:var(--text);font-weight:600;letter-spacing:1px}
+.cmd-status-tag{font-family:var(--mono);font-size:11px;color:var(--green);background:rgba(74,222,128,.1);padding:2px 8px;border-radius:4px;border:1px solid rgba(74,222,128,.2)}
+.cmd-status-metrics{font-family:var(--mono);font-size:12px;color:var(--text3);display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.cmd-status-metrics b{color:var(--yellow);font-weight:700}
+.cmd-sep{color:var(--border2);margin:0 4px}
+.cmd-threat{font-family:var(--mono);letter-spacing:2px;color:var(--orange)}
+
+.cmd-body{display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start}
+.cmd-main-col{display:flex;flex-direction:column;gap:16px}
+.cmd-side-col{display:flex;flex-direction:column;gap:12px}
+
+.cmd-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.cmd-section-header{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--bg3)}
+.cmd-section-icon{font-size:16px}
+.cmd-section-title{font-family:var(--mono);font-size:13px;color:var(--text2);letter-spacing:.5px}
+
+.cmd-feed{max-height:420px;overflow-y:auto;padding:4px 0}
+.cmd-feed-item{display:flex;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border);transition:background .15s}
+.cmd-feed-item:last-child{border-bottom:none}
+.cmd-feed-item:hover{background:var(--bg3)}
+.cmd-feed-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.cmd-feed-content{flex:1;min-width:0}
+.cmd-feed-text{font-size:13px;color:var(--text2);line-height:1.5}
+.cmd-feed-time{font-size:11px;color:var(--text3);font-family:var(--mono);margin-top:3px}
+
+/* Progress bar */
+.cmd-progress{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px}
+.cmd-progress-title{font-size:14px;font-weight:600;margin-bottom:12px;color:var(--text)}
+.cmd-progress-bar{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:10px}
+.cmd-pblock{font-family:var(--mono);font-size:11px;padding:4px 6px;border-radius:4px;text-align:center;min-width:28px;cursor:default;transition:all .2s}
+.cmd-pblock.explored{background:rgba(74,222,128,.15);color:var(--green);border:1px solid rgba(74,222,128,.2);cursor:pointer}
+.cmd-pblock.explored:hover{background:rgba(74,222,128,.25);transform:translateY(-1px)}
+.cmd-pblock.unexplored{background:var(--bg3);color:var(--text3);border:1px solid var(--border)}
+.cmd-pblock.gap{background:var(--bg4);color:var(--text3);border:1px solid var(--border);min-width:40px;font-size:14px;letter-spacing:2px}
+.cmd-pblock.lethal{background:rgba(220,38,38,.15);color:var(--red);border:1px solid rgba(220,38,38,.2)}
+.cmd-pblock.lethal:hover{background:rgba(220,38,38,.25)}
+.cmd-progress-legend{display:flex;gap:16px;font-size:11px;color:var(--text3);font-family:var(--mono)}
+.cmd-legend-dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.cmd-legend-dot.explored{background:rgba(74,222,128,.5)}
+.cmd-legend-dot.unexplored{background:var(--bg4);border:1px solid var(--border)}
+.cmd-legend-dot.lethal{background:rgba(220,38,38,.5)}
+
+/* Quick actions sidebar */
+.cmd-quick-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px}
+.cmd-quick-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.cmd-quick-item{font-size:13px;color:var(--text2);padding:8px 10px;border-radius:var(--radius);cursor:pointer;transition:all .15s;border-left:2px solid transparent}
+.cmd-quick-item:hover{background:var(--bg3);color:var(--text);border-left-color:var(--yellow)}
+.cmd-quick-alert{border-left-color:var(--red) !important;background:rgba(239,68,68,.05)}
+.cmd-alert-num{background:var(--red);color:#fff;font-size:11px;padding:1px 6px;border-radius:8px;margin-left:6px;font-weight:700}
+
+.cmd-nav-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.cmd-nav-card{display:flex;flex-direction:column;align-items:center;padding:10px 6px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .15s;gap:2px}
+.cmd-nav-card:hover{border-color:var(--yellow);background:var(--bg4)}
+.cmd-nav-icon{font-size:20px}
+.cmd-nav-label{font-size:12px;color:var(--text2)}
+.cmd-nav-count{font-size:14px;font-weight:700;color:var(--yellow)}
+
+/* User info card */
+.cmd-user-info{display:flex;flex-direction:column;gap:8px}
+.cmd-user-level{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.cmd-user-progress-wrap{display:flex;align-items:center;gap:8px}
+.cmd-user-progress{flex:1;height:6px;background:var(--bg4);border-radius:3px;overflow:hidden}
+.cmd-user-progress-fill{height:100%;background:linear-gradient(90deg,var(--yellow),var(--yellow2));border-radius:3px;transition:width .5s}
+.cmd-user-progress-text{font-family:var(--mono);font-size:11px;color:var(--yellow);min-width:32px;text-align:right}
+.cmd-user-stats{font-size:11px;color:var(--text3);font-family:var(--mono)}
+
+/* Mobile responsive */
+@media(max-width:768px){
+  .cmd-body{grid-template-columns:1fr}
+  .cmd-side-col{order:-1}
+  .cmd-status-metrics{flex-direction:column;gap:2px}
+  .cmd-sep{display:none}
+  .cmd-feed{max-height:300px}
+  .cmd-pblock{padding:3px 4px;min-width:24px;font-size:10px}
+}
+
+
+/* ===== V13 OVERVIEW SECTION ===== */
+.cmd-overview{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px}
+.cmd-overview-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.cmd-overview-title{font-size:22px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px}
+.cmd-overview-icon{color:var(--yellow);font-size:18px}
+.cmd-overview-status{display:flex;align-items:center;gap:6px}
+.cmd-overview-desc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:18px;max-width:720px}
+.cmd-overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.cmd-ov-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 12px;cursor:pointer;transition:all .2s;text-align:center}
+.cmd-ov-card:hover{border-color:var(--yellow);transform:translateY(-1px)}
+.cmd-ov-num{font-size:28px;font-weight:700;color:var(--yellow);font-family:var(--mono)}
+.cmd-ov-label{font-size:13px;color:var(--text);font-weight:600;margin:4px 0 2px}
+.cmd-ov-sub{font-size:11px;color:var(--text3)}
+.cmd-overview-threat{font-size:12px;color:var(--text3);font-family:var(--mono);display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+
+/* Quick action bar */
+.cmd-quick-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.cmd-quick-bar-item{padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
+.cmd-quick-bar-item:hover{border-color:var(--yellow);color:var(--text);background:var(--bg3)}
+
+/* Feed source tag */
+.cmd-feed-source{font-family:var(--mono);font-size:11px;color:var(--text3);font-weight:600;margin-right:4px}
+
+/* v13 body layout */
+.cmd-body-v13{display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start}
+@media(max-width:768px){
+  .cmd-overview-grid{grid-template-columns:repeat(2,1fr)}
+  .cmd-body-v13{grid-template-columns:1fr}
+  .cmd-quick-bar{flex-direction:column}
+  .cmd-quick-bar-item{justify-content:center}
+}
+
+
+/* ===== v14b: PROFILE ===== */
+.prof-hero{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:14px;position:relative}
+.prof-hero-bg{height:80px;background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(167,139,250,.2),rgba(245,215,110,.1))}
+.prof-hero-body{display:flex;align-items:center;gap:14px;padding:0 18px 14px;margin-top:-28px}
+.prof-avatar{width:56px;height:56px;border-radius:50%;background:var(--bg3);border:3px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.prof-info{flex:1;min-width:0}
+.prof-name{font-size:16px;font-weight:700;color:var(--text);display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.prof-meta{font-size:12px;color:var(--text3);margin-top:2px}
+.prof-likes{font-size:13px;color:var(--text2);white-space:nowrap}
+.prof-admin-link{position:absolute;right:16px;top:90px;font-size:12px;color:var(--yellow);cursor:pointer;padding:5px 10px;background:var(--yellow-dim);border-radius:var(--radius)}
+.prof-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.prof-stat{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center}
+.prof-stat-n{font-size:20px;font-weight:700;color:var(--yellow);font-family:var(--mono)}
+.prof-stat-l{font-size:11px;color:var(--text3);margin-top:2px}
+.prof-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:12px}
+.prof-tab{padding:10px 16px;font-size:14px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.prof-tab:hover{color:var(--text)}
+.prof-tab.active{color:var(--yellow);border-bottom-color:var(--yellow)}
+.prof-contrib-stats{display:flex;gap:12px;margin-bottom:12px}
+.prof-cs-item{padding:6px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;font-size:13px;color:var(--text2)}
+.prof-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px;margin-bottom:8px;cursor:pointer;transition:all .15s}
+.prof-card:hover{border-color:var(--yellow)}
+.prof-card-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.prof-card-icon{font-size:20px}
+.prof-card-name{font-size:14px;font-weight:600;color:var(--text)}
+.prof-card-meta{font-size:12px;color:var(--text3)}
+.prof-card-btn{margin-left:auto;font-size:12px;color:var(--yellow);padding:4px 12px;background:var(--yellow-dim);border-radius:var(--radius);white-space:nowrap}
+.prof-card-desc{font-size:13px;color:var(--text2);line-height:1.6;padding:10px;background:var(--bg3);border-radius:var(--radius)}
+/* ===== v14b: ADMIN ===== */
+.adm-hero{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:12px}
+.adm-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:10px}
+.adm-section-hd{font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.adm-link{font-size:13px;color:var(--yellow);cursor:pointer}
+.adm-sum-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.adm-sum{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center;cursor:pointer;transition:all .15s}
+.adm-sum:hover{border-color:var(--yellow)}
+.adm-sum-n{font-size:22px;font-weight:700;color:var(--yellow);font-family:var(--mono)}
+.adm-sum-l{font-size:11px;color:var(--text3);margin-top:2px}
+.adm-tools{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.adm-tool{display:flex;align-items:center;gap:10px;padding:14px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;font-size:14px;color:var(--text2);transition:all .15s}
+.adm-tool:hover{border-color:var(--yellow);color:var(--text)}
+.adm-org{display:flex;flex-direction:column;gap:6px}
+.adm-org-row{display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius)}
+/* ===== v14b: AUDIT ===== */
+.aud-tabs{margin-bottom:12px}
+.aud-filter{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.aud-filter-btn{padding:6px 14px;font-size:13px;color:var(--text3);background:var(--bg2);border:1px solid var(--border);border-radius:20px;cursor:pointer;transition:all .15s}
+.aud-filter-btn:hover,.aud-filter-btn.active{color:var(--text);border-color:var(--yellow);background:var(--yellow-dim)}
+.aud-list{display:flex;flex-direction:column;gap:10px}
+.aud-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px}
+.aud-card-hd{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.aud-type{font-size:12px;color:var(--text3)}
+.aud-date{font-size:12px;color:var(--text3);margin-left:auto}
+.aud-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.aud-meta{font-size:12px;color:var(--text3);margin-bottom:8px}
+.aud-preview{font-size:13px;color:var(--text2);line-height:1.6;padding:10px;background:var(--bg3);border-radius:var(--radius);margin-bottom:10px}
+.aud-actions{display:flex;gap:8px;justify-content:flex-end}
+.aud-btn{padding:8px 24px;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--border);transition:all .15s}
+.aud-reject{background:transparent;color:var(--text2)}
+.aud-reject:hover{background:rgba(239,68,68,.1);color:var(--red);border-color:var(--red)}
+.aud-approve{background:var(--yellow-dim);color:var(--yellow);border-color:rgba(245,215,110,.3)}
+.aud-approve:hover{background:rgba(245,215,110,.2)}
+.aud-resolved{font-size:12px;color:var(--text3);text-align:right;padding-top:6px}
+@media(max-width:768px){
+  .prof-stats{grid-template-columns:repeat(2,1fr)}
+  .adm-tools{grid-template-columns:1fr}
+}
+
+
+/* ===== v16: HOME PAGE ===== */
+.hm-page{max-width:800px}
+.hm-header{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:14px}
+.hm-header-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.hm-title{font-size:22px;font-weight:700;color:var(--text);margin:0}
+.hm-subtitle{font-size:13px;color:var(--text3);margin-top:2px;letter-spacing:1px}
+.hm-header-status{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green)}
+.hm-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(74,222,128,.5);animation:hm-pulse 2s ease infinite}
+@keyframes hm-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hm-header-meta{font-size:12px;color:var(--text3);line-height:1.7}
+
+.hm-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:12px}
+.hm-sh{font-size:16px;font-weight:700;color:var(--text);margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+
+/* Intro */
+.hm-intro p{font-size:14px;color:var(--text2);line-height:1.8;margin:0 0 10px}
+.hm-intro p:last-child{margin-bottom:0}
+.hm-intro strong{color:var(--text)}
+.hm-intro em{color:var(--orange);font-style:normal}
+
+/* Pillars */
+.hm-pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.hm-pillar{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .15s}
+.hm-pillar:hover{border-color:var(--yellow);transform:translateY(-1px)}
+.hm-pillar-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.hm-pillar-icon{font-size:24px}
+.hm-pillar-num{font-size:24px;font-weight:700;color:var(--yellow)}
+.hm-pillar-label{font-size:13px;color:var(--text2);font-weight:500}
+.hm-pillar-desc{font-size:13px;color:var(--text3);line-height:1.6;margin-bottom:8px}
+.hm-pillar-tags{display:flex;flex-wrap:wrap;gap:4px}
+.hm-pillar-tags span{font-size:11px;padding:2px 8px;background:var(--bg4);border-radius:10px;color:var(--text3)}
+
+/* Grading */
+.hm-grading{display:flex;flex-direction:column;gap:12px}
+.hm-grade-item{display:flex;align-items:flex-start;gap:10px}
+.hm-grade-dot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.hm-grade-name{font-size:14px;font-weight:600;color:var(--text)}
+.hm-grade-desc{font-size:13px;color:var(--text3);margin-top:1px}
+
+/* Progress */
+.hm-progress{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:8px}
+.hm-blk{font-size:11px;padding:4px 5px;border-radius:3px;text-align:center;min-width:26px;transition:all .15s;font-family:var(--mono)}
+.hm-blk.on{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.2);cursor:pointer}
+.hm-blk.on:hover{background:rgba(74,222,128,.22);transform:translateY(-1px)}
+.hm-blk.off{background:var(--bg3);color:var(--text3);border:1px solid var(--border)}
+.hm-blk.gap{background:var(--bg4);color:var(--text3);border:1px solid var(--border);min-width:32px;letter-spacing:1px}
+.hm-blk.red{background:rgba(220,38,38,.12);color:var(--red);border:1px solid rgba(220,38,38,.2)}
+.hm-blk.red:hover{background:rgba(220,38,38,.22)}
+.hm-progress-legend{display:flex;gap:14px;font-size:11px;color:var(--text3)}
+.hm-leg-dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.hm-leg-dot.on{background:rgba(74,222,128,.4)}
+.hm-leg-dot.off{background:var(--bg4);border:1px solid var(--border)}
+.hm-leg-dot.red{background:rgba(220,38,38,.4)}
+
+/* Feed */
+.hm-feed{display:flex;flex-direction:column}
+.hm-feed-row{display:flex;gap:8px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.hm-feed-row:last-child{border-bottom:none}
+.hm-feed-time{color:var(--text3);min-width:65px;flex-shrink:0;font-size:12px}
+.hm-feed-src{color:var(--text3);font-weight:600;font-size:12px;flex-shrink:0}
+.hm-feed-txt{color:var(--text2);line-height:1.5}
+
+/* Quick Nav */
+.hm-nav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.hm-nav{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;font-size:14px;color:var(--text2);transition:all .15s}
+.hm-nav:hover{border-color:var(--yellow);color:var(--text)}
+.hm-nav-alert{border-left:2px solid var(--red);color:var(--orange)}
+
+@media(max-width:768px){
+  .hm-pillars{grid-template-columns:1fr}
+  .hm-nav-grid{grid-template-columns:repeat(2,1fr)}
+  .hm-feed-time{min-width:50px;font-size:11px}
+}
+
+
+/* v18 dashboard two-col */
+.hm-cols{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
+.hm-col-main{display:flex;flex-direction:column;gap:0}
+.hm-col-side{display:flex;flex-direction:column;gap:14px;position:sticky;top:73px}
+@media(max-width:900px){.hm-cols{grid-template-columns:1fr}.hm-col-side{position:static}}
+.hm-hot-list{display:flex;flex-direction:column;gap:6px}
+.hm-hot-card{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .2s}
+.hm-hot-card:hover{border-color:var(--yellow)}
+.hm-hot-icon{font-size:24px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:8px;flex-shrink:0}
+.hm-hot-info{flex:1;min-width:0}
+.hm-hot-name{font-weight:600;font-size:14px;color:var(--text)}
+.hm-hot-sub{font-size:12px;color:var(--text3);margin-top:1px}
+.hm-hot-meta{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
+.hm-hot-views{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.hm-hot-danger{font-size:11px;font-weight:600}
+.hm-sh-badge{font-size:11px;padding:2px 8px;border-radius:4px;background:var(--red);color:#fff;font-weight:700;margin-left:8px;vertical-align:middle}
+.hm-sh-badge-pink{background:#ff2d55}
+.hm-ugc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:600px){.hm-ugc-grid{grid-template-columns:1fr}}
+.hm-ugc-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .2s}
+.hm-ugc-card:hover{border-color:var(--yellow)}
+.hm-ugc-cover{height:80px;display:flex;align-items:center;justify-content:center;font-size:36px;background:linear-gradient(135deg,rgba(245,215,110,.1),rgba(96,165,250,.1))}
+.hm-ugc-body{padding:10px 12px}
+.hm-ugc-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hm-ugc-author{font-size:12px;color:var(--text3);margin-top:4px}
+.hm-ugc-stats{font-size:11px;color:var(--text3);margin-top:4px;font-family:var(--mono)}
+.hm-ugc-more{text-align:center;padding:10px;font-size:13px;color:var(--yellow);cursor:pointer;margin-top:4px}
+.hm-ugc-more:hover{text-decoration:underline}
+.hm-user-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.hm-user-banner{height:64px;background:linear-gradient(135deg,#1a1408 0%,#2a1f0a 40%,#0d1a2e 100%)}
+.hm-user-body{padding:0 16px 16px;text-align:center}
+.hm-user-avatar{width:56px;height:56px;border-radius:50%;background:var(--bg);border:3px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-size:28px;margin:-28px auto 0;position:relative}
+.hm-user-name{font-size:16px;font-weight:700;margin-top:8px;color:var(--text)}
+.hm-user-role{font-size:12px;color:var(--yellow);margin-top:2px}
+.hm-user-achvs{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:8px}
+.hm-achv{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(245,215,110,.12);color:var(--yellow);border:1px solid rgba(245,215,110,.2)}
+.hm-user-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.hm-us{text-align:center}
+.hm-us-num{font-size:16px;font-weight:700;color:var(--text);font-family:var(--mono)}
+.hm-us-label{font-size:10px;color:var(--text3);margin-top:1px}
+.hm-user-actions{display:flex;gap:8px;margin-top:12px}
+.hm-user-btn{flex:1;padding:8px;text-align:center;font-size:12px;font-weight:600;border-radius:8px;background:var(--bg);border:1px solid var(--border);color:var(--text);cursor:pointer;transition:all .2s}
+.hm-user-btn:hover{border-color:var(--yellow);color:var(--yellow)}
+.hm-user-btn-alert{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.3);color:var(--red)}
+.hm-user-btn-alert:hover{background:rgba(239,68,68,.2)}
+.hm-side-nav{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.hm-side-title{font-size:13px;font-weight:700;color:var(--text3);margin:0 0 10px;text-transform:uppercase;letter-spacing:.5px}
+.hm-qnav{padding:8px 10px;font-size:13px;color:var(--text);border-radius:8px;cursor:pointer;transition:background .15s}
+.hm-qnav:hover{background:var(--bg);color:var(--yellow)}
+.hm-side-notice{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.hm-notice-text{font-size:12px;color:var(--text3);line-height:1.6}
+.hm-notice-text strong{color:var(--yellow)}
+
+
+/* v19 Feature Cards */
+.fc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.fc-grid{grid-template-columns:1fr}}
+.fc-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px 22px 20px;cursor:pointer;transition:border-color .2s,transform .15s}
+.fc-card:hover{border-color:var(--yellow);transform:translateY(-2px)}
+.fc-icon{font-size:40px;margin-bottom:14px;line-height:1}
+.fc-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:12px}
+.fc-tag-green{background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.25)}
+.fc-tag-orange{background:rgba(251,146,60,.15);color:#fb923c;border:1px solid rgba(251,146,60,.25)}
+.fc-tag-blue{background:rgba(96,165,250,.15);color:#60a5fa;border:1px solid rgba(96,165,250,.25)}
+.fc-tag-purple{background:rgba(168,85,247,.15);color:#a855f7;border:1px solid rgba(168,85,247,.25)}
+.fc-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.3}
+.fc-desc{font-size:13px;color:var(--text3);line-height:1.6;margin-bottom:14px}
+.fc-link{font-size:13px;font-weight:600;color:var(--yellow)}
+.fc-card:hover .fc-link{text-decoration:underline}
+
+/* Stats Bar */
+.fc-stats-bar{display:flex;justify-content:space-around;align-items:center;padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+@media(max-width:600px){.fc-stats-bar{flex-wrap:wrap;gap:16px;justify-content:center}}
+.fc-stat{text-align:center;min-width:80px}
+.fc-stat-num{font-size:28px;font-weight:800;color:var(--yellow);font-family:var(--mono);line-height:1.2}
+.fc-stat-label{font-size:12px;color:var(--text3);margin-top:4px}
+
+
+/* v20 Guide page */
+.gd-page,.td-page,.cg-page{padding:0 20px 40px}
+.gd-back{font-size:13px;color:var(--text3);cursor:pointer;padding:8px 0;margin-bottom:8px}
+.gd-back:hover{color:var(--yellow)}
+.gd-hero{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.gd-hero-icon{font-size:48px;line-height:1}
+.gd-hero-title{font-size:24px;font-weight:800;color:var(--text);margin:0}
+.gd-hero-sub{font-size:13px;color:var(--text3);margin-top:4px}
+.gd-intro{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px}
+.gd-intro p{margin:0 0 8px}
+.gd-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.gd-step{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:border-color .2s}
+.gd-step:hover{border-color:var(--yellow)}
+.gd-step-num{width:28px;height:28px;border-radius:50%;background:var(--yellow);color:#000;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.gd-step-icon{font-size:28px;flex-shrink:0;margin-top:-2px}
+.gd-step-body{flex:1;min-width:0}
+.gd-step-head{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+.gd-step-title{font-size:15px;font-weight:700;color:var(--text)}
+.gd-step-desc{font-size:13px;color:var(--text3);line-height:1.6}
+.gd-tip{font-size:13px;color:var(--text3);line-height:1.6;padding:16px;background:var(--bg2);border:1px solid var(--border);border-radius:12px}
+.gd-link{color:var(--yellow);cursor:pointer;font-weight:600}
+.gd-link:hover{text-decoration:underline}
+.fc-tag-red{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.25)}
+
+/* v20 Trending page */
+.td-list{display:flex;flex-direction:column;gap:6px;margin-bottom:24px}
+.td-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .2s}
+.td-item:hover{border-color:var(--yellow)}
+.td-rank{width:28px;height:28px;border-radius:50%;background:var(--bg);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text3)}
+.td-rank-top{background:var(--yellow);color:#000}
+.td-icon{font-size:26px;flex-shrink:0;width:36px;text-align:center}
+.td-info{flex:1;min-width:0}
+.td-name{font-size:14px;font-weight:600;color:var(--text)}
+.td-meta{font-size:12px;color:var(--text3);margin-top:2px}
+.td-type{padding:1px 6px;border-radius:4px;background:rgba(245,215,110,.1);color:var(--yellow);font-size:10px;font-weight:600}
+.td-right{text-align:right;flex-shrink:0}
+.td-views{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.td-danger{font-size:11px;font-weight:600;margin-top:2px}
+
+/* v20 Creator Guide page */
+.cg-section{margin-bottom:28px}
+.cg-sh{font-size:17px;font-weight:700;color:var(--text);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.cg-text{font-size:14px;color:var(--text2);line-height:1.7;margin:0}
+.cg-steps{display:flex;flex-direction:column;gap:10px}
+.cg-step{display:flex;align-items:flex-start;gap:12px;padding:14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px}
+.cg-step-n{width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cg-step div:last-child{font-size:13px;color:var(--text2);line-height:1.6}
+.cg-grades{display:flex;flex-direction:column;gap:10px}
+.cg-grade{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text2);line-height:1.6}
+.cg-grade-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.cg-tips{margin:0;padding-left:20px;font-size:13px;color:var(--text2);line-height:1.8}
+.cg-tips li{margin-bottom:6px}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+<div class="header-inner">
+  <div class="logo" onclick="goHome()">◈ BACKROOMS <span>WIKI</span></div>
+  <div class="header-search">
+    <input type="text" id="searchInput" placeholder="搜索层级、实体、物品..." autocomplete="off">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+  <nav class="nav-tabs">
+    <div class="nav-tab active" data-level="1" onclick="switchLevel(1)">沉浸浏览</div>
+    <div class="nav-tab" data-level="2" onclick="switchLevel(2)">Wiki 工作区</div>
+  </nav>
+</div>
+</header>
+
+<!-- LEVEL 1 -->
+<div id="level1">
+  <!-- Phase: The Fall -->
+  <div id="phase-fall">
+    <div class="fall-text" id="fallText"></div>
+    <div class="fall-hint" id="fallHint">[ 点击继续 ]</div>
+  </div>
+  <!-- Phase: Terminal Boot -->
+  <div id="phase-boot">
+    <div class="terminal-block" id="terminalBlock"></div>
+  </div>
+  <!-- Phase: M.E.G. Transmission -->
+  <div id="phase-transmission">
+    <div class="pda-container" id="pdaContainer"></div>
+  </div>
+  <!-- Phase: Corridor -->
+  <div id="phase-corridor">
+    <div class="corridor-bg">
+      <div class="corridor-wall-l"></div>
+      <div class="corridor-wall-r"></div>
+      <div class="corridor-ceiling"><div class="fluoro-light"></div></div>
+      <div class="shadow-figure"></div>
+    </div>
+    <div class="hud hud-top-left">WANDERER // STATUS: ACTIVE</div>
+    <div class="hud hud-top-right">
+      <div class="hud-btn" onclick="switchLevel(2)" title="Wiki 工作区">📋</div>
+    </div>
+    <div class="hud hud-bottom">
+      <div class="hud-hint">沿着走廊前进，查看墙上的记录...</div>
+      <div><div class="hud-enter-l2" onclick="switchLevel(2)">⬡ 进入 Wiki 工作区</div></div>
+    </div>
+    <div class="channel-bar">
+      <div class="channel-inner" id="channelBar"></div>
+    </div>
+    <div class="corridor-section" id="corridorContent"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-sheet in-world" id="modalSheet"></div>
+</div>
+
+<!-- LEVEL 2 -->
+<div id="level2">
+  <div class="l2-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="l2-main" id="l2Main"></main>
+  </div>
+  <nav class="mobile-nav" id="mobileNav"></nav>
+</div>
+
+<script>
+// ============================================================
+// BACKROOMS WIKI v10 — COMPLETE JAVASCRIPT
+// ============================================================
+
+// ====== DATA ======
+const DB = {
+  levels:[
+    {id:"level-0",name:"Level 0",subtitle:"大厅",theme:"indoor",grade:"core",danger:1,dims:{entity:1,env:4,resource:3,nav:1,psych:2},summary:"Level 0 是后室的第一层级，也是绝大多数流浪者进入后室后到达的第一个地方。它表现为一个看似无限延伸的办公空间——单调的黄色墙纸、潮湿的地毯、嗡嗡作响的荧光灯。",desc:"Level 0 是后室中最为人所知的层级，通常被视为后室的\"入口大厅\"。\n\n## 环境描述\n\n这是一片看似无穷无尽的空旷办公室空间。黄色的墙纸覆盖着所有墙壁，脚下是潮湿且散发着霉味的单色地毯。荧光灯持续发出嗡鸣声。\n\n## 生存建议\n\n- 不要长时间停留在同一位置\n- 如果听到脚步声，保持安静并移动\n- 荧光灯闪烁加剧时应立刻离开\n- 寻找杏仁水作为补给",entrances:["从现实中卡出（noclip）"],exits:[{target:"level-1",desc:"沿一个方向持续行走"},{target:"level-2",desc:"找到金属门走廊"}],entities_here:["entity-smiler","entity-skin-stealer"],image:"🏢",views:23400,comments:156,bookmarks:892},
+    {id:"level-1",name:"Level 1",subtitle:"穹顶仓库",theme:"industrial",grade:"core",danger:2,dims:{entity:2,env:3,resource:3,nav:2,psych:2},summary:"Level 1 是一个巨大的工业仓库空间，混凝土地板延伸至视线尽头。天花板高得几乎消失在黑暗中。",desc:"Level 1 是后室的第二个主要层级。\n\n## 环境描述\n\n混凝土墙壁和地面构成了主体。照明来自散布在各处的工业灯具，许多已损坏。\n\n## 生存建议\n\n- 注意脚下，地面湿滑\n- 远离滴水区域\n- 可以在开阔区域建立临时营地",entrances:[{target:"level-0",desc:"从Level 0持续行走"}],exits:[{target:"level-2",desc:"找到向下的楼梯"},{target:"level-3",desc:"进入货运电梯"}],entities_here:["entity-hound"],image:"🏭",views:15200,comments:87,bookmarks:534},
+    {id:"level-2",name:"Level 2",subtitle:"管道梦境",theme:"industrial",grade:"core",danger:3,dims:{entity:3,env:2,resource:2,nav:1,psych:3},summary:"Level 2 由无尽的黑暗维护通道组成。密集的管道在头顶和两侧蜿蜒，蒸汽不时从接缝处喷出。",desc:"Level 2 是一个由维护通道和管道系统组成的迷宫。\n\n## 环境描述\n\n狭窄的通道被密密麻麻的管道包围。蒸汽从各处泄漏，温度可达43°C。\n\n## 危险\n\n- 高温环境导致脱水风险极高\n- 蒸汽喷射可能造成灼伤",entrances:[{target:"level-1",desc:"从Level 1向下的楼梯"}],exits:[{target:"level-3",desc:"找到标有出口的门"}],entities_here:["entity-smiler"],image:"🔧",views:11800,comments:63,bookmarks:312},
+    {id:"level-3",name:"Level 3",subtitle:"电气站",theme:"industrial",grade:"core",danger:3,dims:{entity:2,env:2,resource:2,nav:2,psych:3},summary:"Level 3 是一座庞大的永无止境的电气设施。嗡嗡作响的变压器、密布的电缆。",desc:"Level 3 类似一个巨大的发电厂内部。\n\n## 环境描述\n\n巨大的变压器和配电柜排列在各处。空气中持续弥漫着臭氧气味。\n\n## 危险\n\n- 触电风险极高\n- 部分区域有强电磁场",entrances:[{target:"level-2",desc:"通过标有出口的门"}],exits:[{target:"level-4",desc:"找到标准电梯按B1"}],entities_here:[],image:"⚡",views:9200,comments:45,bookmarks:267},
+    {id:"level-4",name:"Level 4",subtitle:"废弃办公室",theme:"indoor",grade:"core",danger:2,dims:{entity:2,env:4,resource:4,nav:3,psych:1},summary:"Level 4 是一栋空旷的办公大楼。与Level 0不同，这里有窗户——尽管窗外什么也看不到。相对安全的休息站。",desc:"Level 4 是后室中相对安全的层级之一。\n\n## 环境描述\n\n标准的办公室布局——隔间、会议室、茶水间一应俱全。\n\n## 资源\n\n- 茶水间偶尔能找到杏仁水\n- 自动贩卖机有时仍能使用\n- M.E.G.在此设有前哨站",entrances:[{target:"level-3",desc:"乘坐电梯"}],exits:[{target:"level-5",desc:"消防楼梯向上"},{target:"level-11",desc:"从窗户跳下"}],entities_here:["entity-dullers"],image:"🗂️",views:13500,comments:92,bookmarks:478},
+    {id:"level-5",name:"Level 5",subtitle:"酒店",theme:"indoor",grade:"core",danger:3,dims:{entity:3,env:3,resource:3,nav:2,psych:2},summary:"Level 5 是一座无尽的、风格不一的酒店。走廊连接着无数客房，每间装修风格截然不同。",desc:"Level 5 类似一座巨大的酒店。\n\n## 注意事项\n\n- 开门前仔细倾听\n- 不要进入发出异响的房间\n- 有些房间内有补给",entrances:[{target:"level-4",desc:"消防楼梯向上"}],exits:[{target:"level-6",desc:"找到EXIT紧急出口"}],entities_here:["entity-skin-stealer"],image:"🏨",views:10100,comments:56,bookmarks:345},
+    {id:"level-6",name:"Level 6",subtitle:"灯光森林",theme:"nature",grade:"core",danger:2,dims:{entity:2,env:4,resource:3,nav:3,psych:1},summary:"Level 6 是一片昏暗的、无边无际的森林。树木被荧光灯管缠绕，在永恒的黄昏中发出微弱的光。",desc:"Level 6 是后室中少数具有自然环境特征的层级。\n\n## 环境描述\n\n一片辽阔的森林。树木上缠绕着荧光灯管，是唯一的光源。温度约15°C。",entrances:[{target:"level-5",desc:"紧急出口"}],exits:[{target:"level-7",desc:"向森林深处持续行走"}],entities_here:["entity-canary"],image:"🌲",views:14300,comments:78,bookmarks:523},
+    {id:"level-7",name:"Level 7",subtitle:"浅海",theme:"nature",grade:"core",danger:3,dims:{entity:3,env:2,resource:1,nav:1,psych:4},summary:"Level 7 是一片无边无际的浅海。水深及膝至腰部，温暖而浑浊。没有陆地，没有天际线。",desc:"Level 7 是后室中最具心理压迫感的层级之一。\n\n## 危险\n\n- 长期暴露导致严重的心理侵蚀\n- 方向感完全丧失",entrances:[{target:"level-6",desc:"森林深处"}],exits:[{target:"level-8",desc:"水中漩涡"}],entities_here:[],image:"🌊",views:8900,comments:67,bookmarks:298},
+    {id:"level-8",name:"Level 8",subtitle:"洞穴系统",theme:"nature",grade:"core",danger:4,dims:{entity:4,env:2,resource:1,nav:1,psych:3},summary:"Level 8 是一个庞大的地下洞穴网络。伸手不见五指的黑暗中，实体密度极高。",desc:"Level 8 是一个巨大的天然洞穴系统。\n\n## 高危警告\n\n- 实体密度极高\n- 无光照，必须自备光源\n- 迷路概率极高",entrances:[{target:"level-7",desc:"水中漩涡"}],exits:[{target:"level-9",desc:"有微光的通道"}],entities_here:["entity-hound","entity-smiler"],image:"🕳️",views:7600,comments:54,bookmarks:213},
+    {id:"level-9",name:"Level 9",subtitle:"暗黑郊区",theme:"indoor",grade:"core",danger:3,dims:{entity:3,env:3,resource:2,nav:2,psych:4},summary:"Level 9 看起来像普通的郊区住宅区——但天空是漆黑的。所有房屋灯都亮着，却没有居民。",desc:"Level 9 是后室中最具\"恐怖谷\"效应的层级。\n\n## 心理影响\n\n- 强烈的恐怖谷效应\n- 长时间停留导致严重的认知失调",entrances:[{target:"level-8",desc:"有微光的通道"}],exits:[{target:"level-10",desc:"走到社区边缘"}],entities_here:["entity-skin-stealer"],image:"🏘️",views:12100,comments:89,bookmarks:456},
+    {id:"level-10",name:"Level 10",subtitle:"麦田",theme:"nature",grade:"core",danger:1,dims:{entity:1,env:5,resource:4,nav:4,psych:1},summary:"Level 10 是一片无边无际的金色麦田。温暖的阳光，微风吹过麦浪——后室中罕见的安全休息站。",desc:"Level 10 是后室中最为宜人的层级之一。\n\n## 资源\n\n- 麦穗可以食用\n- 偶尔能找到水井\n- M.E.G.在此设有中转站",entrances:[{target:"level-9",desc:"社区边缘"}],exits:[{target:"level-11",desc:"废弃谷仓"}],entities_here:["entity-canary"],image:"🌾",views:16700,comments:102,bookmarks:687},
+    {id:"level-11",name:"Level 11",subtitle:"无尽城市",theme:"nature",grade:"core",danger:3,dims:{entity:3,env:3,resource:3,nav:2,psych:2},summary:"Level 11 是一座永远处于黄昏中的巨大城市。摩天大楼林立，街道空无一人。",desc:"Level 11 是后室中最大的\"人造\"环境之一。\n\n## 特征\n\n- 部分商店有物资补给\n- M.E.G.在此设有大型前哨站\n- 建筑内部可能通向其他层级",entrances:[{target:"level-4",desc:"从窗户跳下"},{target:"level-10",desc:"废弃谷仓"}],exits:[{target:"level-37",desc:"特定的酒店大堂"}],entities_here:["entity-dullers","entity-hound"],image:"🌆",views:18900,comments:134,bookmarks:756},
+    {id:"level-37",name:"Level 37",subtitle:"回忆旅馆",theme:"safe",grade:"core",danger:0,dims:{entity:0,env:5,resource:5,nav:5,psych:0},summary:"Level 37 是一座温馨的小旅馆。柔和的灯光、舒适的床铺、壁炉中跳动的火焰。最安全的避风港。",desc:"Level 37 是后室中最安全、最舒适的层级。\n\n## 特殊性质\n\n- 零实体\n- 无限补给\n- 强烈的心理安慰效果",entrances:[{target:"level-11",desc:"特定的酒店大堂"}],exits:[{target:"level-0",desc:"旅馆后门（循环回Level 0）"}],entities_here:[],image:"🏡",views:21300,comments:178,bookmarks:1023},
+    {id:"level-fun",name:"Level Fun",subtitle:"=)",theme:"danger",grade:"core",danger:5,dims:{entity:5,env:1,resource:0,nav:0,psych:5},summary:"充满彩色气球和派对装饰的空间。\"COME PLAY WITH US =)\" 这是后室中最致命的层级之一。",desc:"Level Fun 是后室中最具欺骗性的层级。\n\n## ⚠️ 最高危险警告\n\n- 派对客的巢穴\n- 进入后几乎不可能逃出\n- 所有\"食物\"都是陷阱",entrances:["从任何层级的特定异常区域卡入"],exits:[],entities_here:["entity-partygoer"],image:"🎈",views:25600,comments:234,bookmarks:1156},
+    {id:"level-188",name:"Level 188",subtitle:"静谧窗台",theme:"safe",grade:"consensus",danger:0,dims:{entity:0,env:5,resource:4,nav:4,psych:0},summary:"位于高处的宽阔窗台。透过巨大的落地窗，可以看到永恒的星空和云海。",desc:"Level 188 是一个以宁静著称的层级。\n\n## 特殊效果\n\n- 强烈的心理治愈效果\n- 消除其他层级积累的心理侵蚀",entrances:[{target:"level-11",desc:"城市中某栋摩天楼顶层"}],exits:[{target:"level-0",desc:"窗台尽头的小门"}],entities_here:[],image:"🌌",views:14800,comments:96,bookmarks:634}
+  ],
+  entities:[
+    {id:"entity-skin-stealer",name:"窃皮者",subtitle:"Entity 1",theme:"lethal",grade:"core",dangerLevel:"lethal",summary:"可以模仿人类外貌和声音，试图接近并取代流浪者。如果遇到\"看起来不太对\"的人——那很可能就是窃皮者。",habitat:["level-0","level-5","level-9"],image:"👤",views:19800,comments:167,bookmarks:834},
+    {id:"entity-smiler",name:"笑靥",subtitle:"Entity 3",theme:"lethal",grade:"core",dangerLevel:"lethal",summary:"黑暗角落里两个漂浮的发光圆点——笑靥的\"眼睛\"。以扭曲的微笑注视着路过的流浪者。",habitat:["level-0","level-2","level-8"],image:"😈",views:22100,comments:189,bookmarks:945},
+    {id:"entity-hound",name:"猎犬",subtitle:"Entity 8",theme:"hostile",grade:"core",dangerLevel:"hostile",summary:"外形类似变形犬类，体型更大更具攻击性。通常成群活动。在光线充足的区域较少出现。",habitat:["level-1","level-8","level-11"],image:"🐕",views:15400,comments:112,bookmarks:567},
+    {id:"entity-dullers",name:"钝人",subtitle:"Entity 15",theme:"neutral",grade:"core",dangerLevel:"neutral",summary:"穿着西装的普通人类，但面部特征模糊不清。通常只是站着或缓慢移动，不具有攻击性。",habitat:["level-4","level-11"],image:"🧑‍💼",views:8900,comments:56,bookmarks:312},
+    {id:"entity-canary",name:"金丝雀",subtitle:"Entity 11",theme:"friendly",grade:"core",dangerLevel:"friendly",summary:"后室中少数友好实体。明亮的黄色小鸟，出现在安全区域。歌声具有心理治愈效果。",habitat:["level-6","level-10","level-37"],image:"🐦",views:13200,comments:89,bookmarks:567},
+    {id:"entity-partygoer",name:"派对客",subtitle:"Partygoer",theme:"lethal",grade:"core",dangerLevel:"lethal",summary:"\"Come play with us =)\" Level Fun的居民。脸上永远挂着不自然的笑容。接受邀请的人再也没有回来。",habitat:["level-fun"],image:"🎭",views:17600,comments:145,bookmarks:723}
+  ],
+  items:[
+    {id:"item-almond-water",name:"杏仁水",subtitle:"Almond Water",theme:"survival",grade:"core",summary:"后室中最重要的生存资源。能解渴充饥，还能抵消部分心理侵蚀效果。在后室中就是硬通货。",found_in:["level-0","level-4","level-10","level-37"],image:"💧",views:20100,comments:156,bookmarks:890},
+    {id:"item-liquid-pain",name:"液体痛苦",subtitle:"Liquid Pain",theme:"danger",grade:"core",summary:"外观与杏仁水几乎一模一样，但饮用后会造成剧烈全身疼痛，并让你对实体的感知能力暂时消失。",found_in:["level-2","level-8"],image:"🩸",views:11200,comments:78,bookmarks:423},
+    {id:"item-royal-ration",name:"皇家口粮",subtitle:"Royal Rations",theme:"survival",grade:"core",summary:"最珍贵的食物补给。金色包装纸内含高热量压缩饼干。食用后有轻微伤口愈合加速效果。",found_in:["level-4","level-37"],image:"👑",views:7800,comments:45,bookmarks:289}
+  ],
+  groups:[
+    {id:"group-meg",name:"M.E.G.",subtitle:"Major Explorer Group",theme:"friendly",grade:"core",stance:"friendly",summary:"后室中最大、最有组织的人类团体。致力于探索后室、记录层级信息、建立安全前哨站。",bases:["level-4","level-10","level-11"],image:"🏛️",views:16500,comments:123,bookmarks:678},
+    {id:"group-bntg",name:"B.N.T.G.",subtitle:"Backrooms Nonaligned Trade Group",theme:"neutral",grade:"core",stance:"neutral",summary:"后室中最大的贸易网络。不参与政治或军事，专注于在各层级之间运输和交换物资。",bases:["level-1","level-11"],image:"🤝",views:9800,comments:67,bookmarks:412},
+    {id:"group-lost",name:"失落一族",subtitle:"The Lost",theme:"hostile",grade:"core",stance:"hostile",summary:"由精神崩溃的流浪者组成的攻击性团体。已完全放弃回到现实的希望。攻击其他流浪者以抢夺物资。",bases:["level-2","level-8"],image:"💀",views:11300,comments:89,bookmarks:512}
+  ],
+  // User system
+  currentUser:{
+    name:"探险者Alpha",avatar:"👤",level:2,levelName:"编年史家",
+    orgRole:"体系运维者", // set to null for normal user view
+    stats:{entriesCreated:5,editsAccepted:23,suggestionsMade:12,articlesRead:87,commentsMade:34,daysActive:45},
+    achievements:["first-fall","first-read","cartographer","archivist","almond-collector"],
+    bookmarks:["level-0","level-37","entity-smiler"],
+    nextLevelProgress:0.6,nextLevelReq:"还需3篇条目通过审核升至 Lv.3"
+  },
+  achievements:[
+    {id:"first-fall",name:"初次坠入",icon:"🌀",desc:"完成沉浸式入口叙事"},
+    {id:"first-read",name:"初次探索",icon:"🔦",desc:"阅读第一篇条目"},
+    {id:"museum-night",name:"博物馆之夜",icon:"🏛️",desc:"阅读所有分类各至少1篇"},
+    {id:"cartographer",name:"制图师",icon:"🗺️",desc:"提交第一个修改建议"},
+    {id:"archivist",name:"档案员",icon:"📋",desc:"第一篇条目通过审核"},
+    {id:"chronicler",name:"编年史家",icon:"📖",desc:"5篇条目通过审核"},
+    {id:"featured",name:"精品作者",icon:"⭐",desc:"条目被标记为核心设定"},
+    {id:"pathfinder",name:"探路者",icon:"🧭",desc:"发现一条新路径"},
+    {id:"almond-collector",name:"杏仁水收集者",icon:"💧",desc:"连续7天访问Wiki"},
+    {id:"survivor",name:"幸存者",icon:"☠️",desc:"阅读所有极危层级条目"}
+  ],
+  leaderboard:[
+    {rank:1,name:"Lambda_Core",level:3,levelName:"档案管理员",entries:47,edits:312,badge:"👑"},
+    {rank:2,name:"hoah2333",level:3,levelName:"档案管理员",entries:38,edits:287,badge:"🥈"},
+    {rank:3,name:"Romand0",level:3,levelName:"档案管理员",entries:31,edits:245,badge:"🥉"},
+    {rank:4,name:"探险者Alpha",level:2,levelName:"编年史家",entries:5,edits:23,badge:""},
+    {rank:5,name:"azureactive",level:2,levelName:"编年史家",entries:12,edits:89,badge:""},
+    {rank:6,name:"WandererX",level:1,levelName:"记录员",entries:3,edits:15,badge:""},
+    {rank:7,name:"NightOwl",level:1,levelName:"记录员",entries:2,edits:8,badge:""},
+    {rank:8,name:"CaveDweller",level:0,levelName:"流浪者",entries:0,edits:2,badge:""}
+  ],
+  auditQueue:[
+    {id:"audit-1",title:"Level C-1463 — 寂静图书馆",author:"WandererX",type:"new_entry",category:"level",submittedAt:"2026-04-15",status:"pending",priority:"normal"},
+    {id:"audit-2",title:"Entity C-89 — 织网者",author:"NightOwl",type:"new_entry",category:"entity",submittedAt:"2026-04-14",status:"pending",priority:"normal"},
+    {id:"audit-3",title:"Level 0 描述更新",author:"azureactive",type:"edit",category:"level",target:"level-0",submittedAt:"2026-04-16",status:"in_review",reviewer:"hoah2333",priority:"high"},
+    {id:"audit-4",title:"修正 Entity 8 栖息地信息",author:"CaveDweller",type:"suggestion",category:"entity",target:"entity-hound",submittedAt:"2026-04-13",status:"pending",priority:"low"},
+    {id:"audit-5",title:"Level Fun 出口补充",author:"探险者Alpha",type:"edit",category:"level",target:"level-fun",submittedAt:"2026-04-12",status:"approved",reviewer:"Lambda_Core",priority:"normal"}
+  ],
+  orgMembers:[
+    {name:"Lambda_Core",role:"统筹管理者",icon:"👑",status:"active"},
+    {name:"hoah2333",role:"体系运维者",icon:"🔧",status:"active"},
+    {name:"Romand0",role:"体系运维者",icon:"🔧",status:"active"},
+    {name:"azureactive",role:"用户运维者",icon:"📢",status:"active"},
+    {name:"cakelord114514",role:"用户运维者",icon:"📢",status:"active"}
+  ],
+
+  ugcWorks:[
+    {id:"ugc-1",title:"Level 0 的黄色走廊 — 动画短片",author:"画画的小陈",authorLevel:2,type:"video",platform:"douyin",likes:45200,comments:1320,cover:"🎬",tag:"level-0",status:"featured",createdAt:"2026-04-10",desc:"用3D动画还原了Level 0的经典黄色走廊场景，荧光灯闪烁和脚步声的音效设计获得大量好评。"},
+    {id:"ugc-2",title:"后室实体图鉴 — 窃皮者全解析",author:"后室档案局",authorLevel:3,type:"video",platform:"douyin",likes:38700,comments:2100,cover:"📹",tag:"entity-skin-stealer",status:"featured",createdAt:"2026-04-08",desc:"详细解析窃皮者的行为模式、出没规律和应对策略。配合动画演示，是目前最全面的窃皮者科普。"},
+    {id:"ugc-3",title:"如果你掉进了 Level Fun =)",author:"深夜故事会",authorLevel:1,type:"video",platform:"douyin",likes:67300,comments:3400,cover:"🎥",tag:"level-fun",status:"featured",createdAt:"2026-04-12",desc:"第一人称视角的恐怖向短片，模拟误入Level Fun后的求生过程。=) =) =)"},
+    {id:"ugc-4",title:"杏仁水 vs 液体痛苦 — 你能分辨吗？",author:"后室生存指南",authorLevel:2,type:"video",platform:"douyin",likes:29400,comments:1800,cover:"🧪",tag:"item-almond-water",status:"approved",createdAt:"2026-04-11",desc:"对比两种外观几乎相同的液体，教你如何在后室中分辨救命之水和致命毒药。"},
+    {id:"ugc-5",title:"Level 37 氛围音乐 — 壁炉与雪景",author:"LoFi后室",authorLevel:1,type:"audio",platform:"douyin",likes:18600,comments:560,cover:"🎵",tag:"level-37",status:"approved",createdAt:"2026-04-09",desc:"一小时的Level 37氛围音乐，壁炉噼啪声+窗外落雪+轻柔钢琴。适合学习和睡眠。"},
+    {id:"ugc-6",title:"M.E.G. 组织架构深度解读",author:"世界观研究所",authorLevel:2,type:"article",platform:"douyin",likes:12300,comments:890,cover:"📝",tag:"group-meg",status:"approved",createdAt:"2026-04-13",desc:"从M.E.G.的成立历史讲起，分析其内部架构、前哨站分布、与其他组织的关系。"},
+    {id:"ugc-7",title:"我在Level 11待了30天 — 城市探索日记",author:"流浪者日记",authorLevel:1,type:"article",platform:"douyin",likes:21500,comments:1450,cover:"📖",tag:"level-11",status:"approved",createdAt:"2026-04-07",desc:"以日记体裁记录在Level 11无尽城市中的30天探索经历。每天发现新建筑、新商店、新线索。"},
+    {id:"ugc-8",title:"后室层级关系图 — 全连接拓扑",author:"数据可视化Pro",authorLevel:2,type:"image",platform:"douyin",likes:34100,comments:920,cover:"🗺️",tag:"all",status:"featured",createdAt:"2026-04-14",desc:"将所有已知层级的入口/出口关系可视化为网络拓扑图，清晰展示层级之间的连接路径。"},
+    {id:"ugc-9",title:"用乐高还原Level 4废弃办公室",author:"积木世界",authorLevel:0,type:"video",platform:"douyin",likes:52800,comments:2700,cover:"🧱",tag:"level-4",status:"featured",createdAt:"2026-04-15",desc:"纯手工用乐高积木1:1还原Level 4的办公环境，连自动贩卖机里的杏仁水都做了出来。"},
+    {id:"ugc-10",title:"失落一族为什么变成了敌人？",author:"后室人文学",authorLevel:1,type:"article",platform:"douyin",likes:15800,comments:1100,cover:"💀",tag:"group-lost",status:"pending_review",createdAt:"2026-04-16",desc:"从心理学角度分析失落一族成员的精神状态变化过程。他们不是天生的恶人，而是被后室逼疯的普通人。"}
+  ],
+
+  activityFeed:[
+    {time:"刚刚",type:"system",icon:"📡",source:"档案终端",text:"记录员 @WandererX 提交了 Level C-1463 的探索报告，等待社区审核",accent:"var(--blue)"},
+    {time:"23分钟前",type:"alert",icon:"🚨",source:"信号监测",text:"Level Fun 区域探测到异常实体活动，信号强度上升 47%",accent:"var(--red)"},
+    {time:"1小时前",type:"audit",icon:"✅",source:"审核系统",text:"@hoah2333 审核通过了 Level 0 的描述更新",accent:"var(--green)"},
+    {time:"2小时前",type:"intercept",icon:"📻",source:"B.N.T.G.",text:"贸易路线 Level 1→11 中断，运输队失联 —— 建议绕行 Level 4",accent:"var(--orange)"},
+    {time:"3小时前",type:"ugc",icon:"🎨",source:"创作广场",text:"@积木世界 的乐高还原 Level 4 视频被标记为精选二创",accent:"var(--purple)"},
+    {time:"5小时前",type:"intercept",icon:"📻",source:"M.E.G.",text:"Alpha-7 前哨站报告 Level 4 茶水间补给已更新，安全状态正常",accent:"var(--green)"},
+    {time:"8小时前",type:"system",icon:"🎯",source:"档案终端",text:"后室档案库收录进度突破 15 层级里程碑",accent:"var(--yellow)"},
+    {time:"10小时前",type:"intercept",icon:"📻",source:"失落一族",text:"[截获加密信号] Level 8 深层区域出现大规模移动… 信号中断",accent:"var(--red)"},
+    {time:"12小时前",type:"audit",icon:"✅",source:"审核系统",text:"@Lambda_Core 批准了 Level Fun 出口信息的补充编辑",accent:"var(--green)"},
+    {time:"1天前",type:"ugc",icon:"🎨",source:"创作广场",text:"@深夜故事会 的 Level Fun 恐怖短片播放量突破 67,000",accent:"var(--purple)"},
+    {time:"1天前",type:"intercept",icon:"📻",source:"未知来源",text:"[未验证信号] Level 188 窗台外的星空… 不是随机生成的… 那是…",accent:"var(--text3)"},
+    {time:"2天前",type:"dispute",icon:"⚠️",source:"社区",text:"杏仁水 vs 液体痛苦的鉴别方法引发社区讨论，待更多数据",accent:"var(--orange)"}
+  ]
+};
+
+// ====== STATE ======
+const state = {
+  currentLevel: 1,
+  immPhase: 'fall', // fall | boot | transmission | corridor
+  fallStep: 0,
+  corridorFilter: 'all',
+  l2Page: 'dashboard',
+  l2Category: 'levels',
+  l2ThemeFilter: null,
+  l2DetailId: null,
+  auditFilter: 'all',
+  searchTimer: null
+};
+
+// ====== HELPERS ======
+function getAllEntries() {
+  const a = [];
+  DB.levels.forEach(e => a.push({...e, type:'level'}));
+  DB.entities.forEach(e => a.push({...e, type:'entity'}));
+  DB.items.forEach(e => a.push({...e, type:'item'}));
+  DB.groups.forEach(e => a.push({...e, type:'group'}));
+  return a;
+}
+function findEntry(id) { return getAllEntries().find(e => e.id === id); }
+function gradeLabel(g) { return g === 'core' ? '核心设定' : g === 'consensus' ? '社区共识' : '创作者内容'; }
+function gradeClass(g) { return g === 'core' ? 'badge-core' : g === 'consensus' ? 'badge-consensus' : 'badge-creator'; }
+function dangerLabel(d) { return ['安全','安全','谨慎','警告','高危','致命'][d] || '未知'; }
+function dangerColor(d) { return ['#4ade80','#4ade80','#f5d76e','#fb923c','#ef4444','#dc2626'][d] || '#a3a3a3'; }
+function threatColor(t) { return t==='lethal'?'#dc2626':t==='hostile'?'#fb923c':t==='friendly'?'#4ade80':'#a3a3a3'; }
+function formatNum(n) { return n>=10000?(n/10000).toFixed(1)+'w':n>=1000?(n/1000).toFixed(1)+'k':String(n); }
+function mdToHTML(md) {
+  if (!md) return '';
+  return md.replace(/## (.+)/g,'<h2>$1</h2>').replace(/- (.+)/g,'<li>$1</li>')
+    .replace(/(<li>.*<\/li>)/gs,m=>'<ul>'+m+'</ul>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>').replace(/<\/ul><br><ul>/g,'');
+}
+function showToast(msg) {
+  const t = document.createElement('div'); t.className='toast'; t.textContent=msg;
+  document.body.appendChild(t); setTimeout(()=>t.remove(),2500);
+}
+
+// ====== LEVEL 1: IMMERSIVE PHASES ======
+
+// --- Phase: The Fall ---
+const fallLines = [
+  "你踩空了。",
+  "不是楼梯，不是路沿——",
+  "你踩穿了现实。",
+  "",
+  "坠落的时间似乎很长，又似乎只是一瞬。",
+  "",
+  "然后你闻到了它——",
+  "潮湿的地毯，陈旧的霉味，",
+  "以及头顶荧光灯永不停歇的嗡鸣。",
+  "",
+  "欢迎来到后室。"
+];
+
+function startFall() {
+  document.getElementById('siteHeader').style.display = 'none';
+  const container = document.getElementById('fallText');
+  container.innerHTML = '';
+  state.fallStep = 0;
+  showNextFallLine();
+}
+
+function showNextFallLine() {
+  if (state.fallStep >= fallLines.length) {
+    document.getElementById('fallHint').classList.add('visible');
+    return;
+  }
+  const container = document.getElementById('fallText');
+  const line = document.createElement('div');
+  line.className = 'fall-line';
+  const text = fallLines[state.fallStep];
+  if (text === '') {
+    line.innerHTML = '<br>';
+  } else {
+    line.textContent = '> ' + text;
+  }
+  container.appendChild(line);
+  setTimeout(() => line.classList.add('visible'), 50);
+  state.fallStep++;
+  setTimeout(showNextFallLine, text === '' ? 400 : 800);
+}
+
+document.getElementById('phase-fall').addEventListener('click', function() {
+  if (state.fallStep >= fallLines.length) {
+    goToBoot();
+  }
+});
+
+// --- Phase: Terminal Boot ---
+function goToBoot() {
+  document.getElementById('phase-fall').style.display = 'none';
+  const boot = document.getElementById('phase-boot');
+  boot.style.display = 'block';
+  state.immPhase = 'boot';
+
+  const lines = [
+    '[SIGNAL DETECTED]',
+    'Scanning frequencies...',
+    'Establishing connection... <span class="terminal-progress"><span class="fill" id="bootProgress"></span></span>',
+    '',
+    'BACKROOMS ARCHIVE TERMINAL // NODE 7',
+    'SYSTEM ACTIVE',
+    '',
+    '> 正在加载档案数据库...'
+  ];
+
+  const block = document.getElementById('terminalBlock');
+  block.innerHTML = '';
+  let i = 0;
+  function showLine() {
+    if (i >= lines.length) {
+      setTimeout(goToTransmission, 1000);
+      return;
+    }
+    const el = document.createElement('div');
+    el.className = 'line';
+    el.innerHTML = lines[i] || '<br>';
+    block.appendChild(el);
+    setTimeout(() => {
+      el.classList.add('visible');
+      if (el.querySelector('#bootProgress')) {
+        setTimeout(() => document.getElementById('bootProgress').style.width = '100%', 100);
+      }
+    }, 50);
+    i++;
+    setTimeout(showLine, lines[i-1] === '' ? 300 : 500);
+  }
+  showLine();
+}
+
+// --- Phase: M.E.G. Transmission ---
+function goToTransmission() {
+  document.getElementById('phase-boot').style.display = 'none';
+  const tx = document.getElementById('phase-transmission');
+  tx.style.display = 'flex';
+  state.immPhase = 'transmission';
+
+  const now = new Date();
+  const dateStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+
+  document.getElementById('pdaContainer').innerHTML = `
+    <div class="pda-header">BACKROOMS ARCHIVE TERMINAL // SYSTEM INIT</div>
+    <div class="pda-meta">
+      <span>SOURCE: Archive Terminal</span>
+      <span>STATUS: 系统就绪</span>
+      <span>DATE: ${dateStr}</span>
+    </div>
+    <div class="pda-body">
+      <p>检测到新终端接入。</p>
+      <p style="margin-top:12px"><strong style="color:var(--yellow)">后室档案系统</strong> 加载完成。本系统自动记录后室内所有已知层级、实体、物品及组织信息。</p>
+      <p style="margin-top:12px">数据来源包括 M.E.G. 探索报告、B.N.T.G. 贸易记录、独立流浪者证词及未验证信号。<span style="color:var(--text3)">本系统不隶属于任何组织，不为任何组织背书。</span></p>
+      <p style="margin-top:16px;font-size:13px;color:var(--text3);text-transform:uppercase;letter-spacing:1px">⚠ 基本生存须知</p>
+      <div class="warning-item"><span class="icon">■</span> 不要停留在原地，持续移动</div>
+      <div class="warning-item"><span class="icon">■</span> 如果荧光灯开始闪烁，立刻跑</div>
+      <div class="warning-item"><span class="icon">■</span> 找到杏仁水 —— 那是你的生命线</div>
+      <div class="warning-item"><span class="icon">■</span> 不要信任任何"看起来像人"的东西</div>
+      <div class="pda-signature">—— Backrooms Archive Terminal · 自主运行系统</div>
+    </div>
+    <div class="pda-footer">
+      <button class="pda-btn ghost" onclick="skipToCorridorDirect()">跳过</button>
+      <button class="pda-btn primary" onclick="goToCorridor()">开始探索 →</button>
+    </div>
+  `;
+}
+
+// --- Phase: Corridor ---
+function goToCorridor() {
+  document.getElementById('phase-transmission').style.display = 'none';
+  document.getElementById('phase-corridor').style.display = 'block';
+  document.getElementById('siteHeader').style.display = '';
+  state.immPhase = 'corridor';
+  renderCorridorChannels();
+  renderCorridor();
+}
+
+function skipToCorridorDirect() {
+  document.getElementById('phase-fall').style.display = 'none';
+  document.getElementById('phase-boot').style.display = 'none';
+  document.getElementById('phase-transmission').style.display = 'none';
+  document.getElementById('phase-corridor').style.display = 'block';
+  document.getElementById('siteHeader').style.display = '';
+  state.immPhase = 'corridor';
+  renderCorridorChannels();
+  renderCorridor();
+}
+
+function renderCorridorChannels() {
+  const cats = [
+    {id:'all',label:'📡 全部频道'},
+    {id:'level',label:'🗺️ 层级档案'},
+    {id:'entity',label:'👁️ 实体通缉'},
+    {id:'item',label:'🎒 物资情报'},
+    {id:'group',label:'📻 组织信号'}
+  ];
+  document.getElementById('channelBar').innerHTML = cats.map(c =>
+    `<div class="channel-btn ${state.corridorFilter===c.id?'active':''}" onclick="filterCorridor('${c.id}')">${c.label}</div>`
+  ).join('');
+}
+
+function filterCorridor(f) {
+  state.corridorFilter = f;
+  renderCorridorChannels();
+  renderCorridor();
+}
+
+function renderCorridor() {
+  const f = state.corridorFilter;
+  const el = document.getElementById('corridorContent');
+  let html = '<div style="height:20px"></div>';
+
+  // Levels section
+  if (f === 'all' || f === 'level') {
+    const levels = [...DB.levels].sort((a,b)=>(b.views||0)-(a.views||0));
+    html += `<div class="corridor-zone">
+      <div class="zone-label">📋 层级探索档案<span class="zone-desc">${levels.length} 份层级档案已收录</span></div>
+      <div class="reports-grid">${levels.map(e => reportCard(e)).join('')}</div>
+    </div>`;
+  }
+
+  // Entities section
+  if (f === 'all' || f === 'entity') {
+    html += `<div class="corridor-zone">
+      <div class="zone-label" style="border-left-color:var(--red)">🚨 实体通缉令<span class="zone-desc">${DB.entities.length} 个已知威胁</span></div>
+      <div class="posters-grid">${DB.entities.map(e => wantedPoster(e)).join('')}</div>
+    </div>`;
+  }
+
+  // Items section
+  if (f === 'all' || f === 'item') {
+    html += `<div class="corridor-zone">
+      <div class="zone-label" style="border-left-color:var(--blue)">📦 物资补给箱<span class="zone-desc">在走廊角落发现的物资</span></div>
+      <div class="supply-list">${DB.items.map(e => supplyItem(e)).join('')}</div>
+    </div>`;
+  }
+
+  // Groups section
+  if (f === 'all' || f === 'group') {
+    html += `<div class="corridor-zone">
+      <div class="zone-label" style="border-left-color:var(--green)">📻 截获无线电信号<span class="zone-desc">来自不同组织的通讯</span></div>
+      <div class="radio-list">${DB.groups.map(e => radioMsg(e)).join('')}</div>
+    </div>`;
+  }
+
+  html += '<div style="height:100px"></div>';
+  el.innerHTML = html;
+}
+
+function reportCard(e) {
+  const dc = dangerColor(e.danger);
+  return `<div class="report-card" onclick="openModal('${e.id}')">
+    <div class="rc-top theme-${e.theme}"><div class="rc-bg"></div>
+      <span class="rc-danger" style="background:${dc}22;color:${dc}">${dangerLabel(e.danger)}</span>${e.image}</div>
+    <div class="rc-body"><h4>${e.name}</h4><div class="rc-sub">${e.subtitle}</div><div class="rc-summary">${e.summary}</div></div>
+    <div class="rc-meta"><span>👁 ${formatNum(e.views)}</span><span>💬 ${e.comments}</span><span>⭐ ${formatNum(e.bookmarks)}</span></div>
+  </div>`;
+}
+
+function wantedPoster(e) {
+  const tc = threatColor(e.dangerLevel);
+  return `<div class="wanted-poster" onclick="openModal('${e.id}')">
+    <div class="wp-header"><span class="wp-icon">${e.image}</span><div><div class="wp-name">${e.name}</div><div class="wp-sub">${e.subtitle}</div>
+    <span class="wp-threat" style="background:${tc}22;color:${tc}">${e.dangerLevel.toUpperCase()}</span></div></div>
+    <div class="wp-summary">${e.summary}</div>
+  </div>`;
+}
+
+function supplyItem(e) {
+  return `<div class="supply-item" onclick="openModal('${e.id}')">
+    <span class="si-icon">${e.image}</span><div><div class="si-name">${e.name}</div><div class="si-sub">${e.subtitle}</div></div>
+  </div>`;
+}
+
+function radioMsg(e) {
+  const fc = e.stance==='friendly'?'var(--green)':e.stance==='hostile'?'var(--red)':'var(--text3)';
+  return `<div class="radio-msg" onclick="openModal('${e.id}')">
+    <div class="rm-freq" style="color:${fc}">FREQ ${Math.floor(Math.random()*900+100)}.${Math.floor(Math.random()*10)} MHz // ${e.stance.toUpperCase()}</div>
+    <div class="rm-name">${e.image} ${e.name} <span style="font-size:12px;color:var(--text3)">${e.subtitle}</span></div>
+    <div class="rm-text">"${e.summary}"</div>
+  </div>`;
+}
+
+// ====== MODAL ======
+function openModal(id) {
+  const e = findEntry(id);
+  if (!e) return;
+  const sheet = document.getElementById('modalSheet');
+  const hasDims = !!e.dims;
+
+  let dimsHTML = '';
+  if (hasDims) {
+    const dn = {entity:'实体威胁',env:'环境稳定',resource:'资源丰度',nav:'导航难度',psych:'心理侵蚀'};
+    const dc = {entity:'#ef4444',env:'#4ade80',resource:'#60a5fa',nav:'#f5d76e',psych:'#a78bfa'};
+    dimsHTML = `<div class="mw-section"><h4>五维评估</h4><div class="radar-bars">${
+      Object.keys(dn).map(k=>`<div class="radar-bar"><span class="label">${dn[k]}</span><div class="track"><div class="fill" style="width:${(e.dims[k]/5)*100}%;background:${dc[k]}"></div></div><span class="val">${e.dims[k]}/5</span></div>`).join('')
+    }</div></div>`;
+  }
+
+  let badgesHTML = `<span class="badge ${gradeClass(e.grade)}">${gradeLabel(e.grade)}</span>`;
+  if (e.danger !== undefined) badgesHTML += ` <span class="badge" style="background:${dangerColor(e.danger)}22;color:${dangerColor(e.danger)}">危险 ${e.danger}/5</span>`;
+  if (e.dangerLevel) badgesHTML += ` <span class="badge" style="background:${threatColor(e.dangerLevel)}22;color:${threatColor(e.dangerLevel)}">${e.dangerLevel}</span>`;
+  if (e.stance) badgesHTML += ` <span class="badge" style="background:${threatColor(e.stance)}22;color:${threatColor(e.stance)}">${e.stance}</span>`;
+
+  let connHTML = '';
+  const sections = [
+    {k:'exits',t:'出口连接',mode:'exits'},{k:'entities_here',t:'出没实体',mode:'ref'},
+    {k:'habitat',t:'出没层级',mode:'ref'},{k:'found_in',t:'发现地点',mode:'ref'},{k:'bases',t:'据点位置',mode:'ref'}
+  ];
+  sections.forEach(s => {
+    const arr = e[s.k]; if (!arr || !arr.length) return;
+    connHTML += `<div class="conn-section"><h4>${s.t}</h4>`;
+    arr.forEach(item => {
+      if (s.mode === 'ref') { const r=findEntry(item); if(r) connHTML+=`<span class="conn-chip" onclick="event.stopPropagation();openModal('${r.id}')">${r.image} ${r.name}</span>`; }
+      else if (typeof item==='object'&&item.target) { const r=findEntry(item.target); if(r) connHTML+=`<span class="conn-chip" onclick="event.stopPropagation();openModal('${r.id}')">${r.image} ${r.name} — ${item.desc}</span>`; }
+    });
+    connHTML += `</div>`;
+  });
+
+  const typeLabel = e.type==='level'?'层级':e.type==='entity'?'实体':e.type==='item'?'物品':'组织';
+  sheet.innerHTML = `
+    <button class="modal-close" onclick="closeModal(event)">✕</button>
+    <div class="mw-stamp">M.E.G. ${typeLabel === '层级' ? '探索报告' : typeLabel === '实体' ? '通缉档案' : typeLabel === '物品' ? '物资记录' : '通讯截获'} // CLASSIFIED</div>
+    <div class="mw-header"><div class="mw-icon">${e.image}</div><div><div class="mw-name">${e.name}</div><div class="mw-sub">${e.subtitle||''}</div><div class="mw-badges">${badgesHTML}</div></div></div>
+    <div class="mw-summary">${e.summary}</div>
+    ${dimsHTML}
+    <div class="mw-desc">${mdToHTML(e.desc)}</div>
+    ${connHTML}
+    <div class="mw-footer">文件编号: MEG-${e.id.toUpperCase()} | 安全级别: ${gradeLabel(e.grade)}</div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(event) {
+  if (event.target === document.getElementById('modalOverlay') || event.currentTarget.classList.contains('modal-close')) {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+// ====== SEARCH ======
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+searchInput.addEventListener('input', function() {
+  clearTimeout(state.searchTimer);
+  state.searchTimer = setTimeout(() => doSearch(this.value), 250);
+});
+searchInput.addEventListener('focus', function() { if (this.value.trim()) doSearch(this.value); });
+document.addEventListener('click', function(e) { if (!e.target.closest('.header-search')) searchResults.classList.remove('visible'); });
+
+function doSearch(q) {
+  q = q.trim().toLowerCase();
+  if (!q) { searchResults.classList.remove('visible'); return; }
+  const matches = getAllEntries().filter(e => e.name.toLowerCase().includes(q) || (e.subtitle && e.subtitle.toLowerCase().includes(q)) || e.summary.toLowerCase().includes(q)).slice(0,8);
+  searchResults.innerHTML = matches.length === 0 ? '<div class="search-item" style="color:var(--text3)">未找到结果</div>' :
+    matches.map(e => `<div class="search-item" onclick="searchResults.classList.remove('visible');searchInput.value='';openModal('${e.id}')">${e.image} ${e.name} <span style="color:var(--text3);font-size:12px">${e.subtitle||''}</span></div>`).join('');
+  searchResults.classList.add('visible');
+}
+
+// ====== LEVEL SWITCHING ======
+function switchLevel(n) {
+  state.currentLevel = n;
+  document.querySelectorAll('.nav-tab').forEach(el => el.classList.toggle('active', el.dataset.level == n));
+  document.getElementById('level1').style.display = n===1?'block':'none';
+  document.getElementById('level2').style.display = n===2?'block':'none';
+  document.getElementById('siteHeader').style.display = '';
+  if (n===1 && state.immPhase !== 'corridor') { /* keep current phase */ }
+  if (n===2) renderL2();
+}
+
+function goHome() {
+  if (state.currentLevel === 2) { state.l2Page='dashboard'; renderL2(); }
+}
+
+// ====== LEVEL 2: WIKI WORKSPACE ======
+const themeZones = {
+  indoor:{icon:'🏢',name:'室内空间'},industrial:{icon:'🏭',name:'工业建筑'},
+  nature:{icon:'🌲',name:'自然环境'},safe:{icon:'🛡️',name:'安全区域'},danger:{icon:'☠️',name:'极危层级'}
+};
+const l2Cats = [
+  {id:'levels',icon:'🗺️',label:'层级',count:DB.levels.length},
+  {id:'entities',icon:'👁️',label:'实体',count:DB.entities.length},
+  {id:'items',icon:'🎒',label:'物品',count:DB.items.length},
+  {id:'groups',icon:'👥',label:'组织',count:DB.groups.length}
+];
+const userLevels = [
+  {lv:0,name:'流浪者',color:'lv0'},{lv:1,name:'记录员',color:'lv1'},
+  {lv:2,name:'编年史家',color:'lv2'},{lv:3,name:'档案管理员',color:'lv3'}
+];
+
+function renderL2() {
+  renderSidebar(); renderMobileNav();
+  const p = state.l2Page;
+  if (p==='ugc') renderUGC();
+  else if (p==='profile') renderProfile();
+  else if (p==='admin') renderAdmin();
+  else if (p==='audit') renderAudit();
+  else if (p==='leaderboard') renderLeaderboard();
+  else if (p==='guide') renderGuide();
+  else if (p==='trending') renderTrending();
+  else if (p==='creator-guide') renderCreatorGuide();
+  else if (p==='detail') renderL2Detail(state.l2DetailId);
+  else if (p==='category') renderL2Category();
+  else renderL2Dashboard();
+}
+
+function renderSidebar() {
+  const p = state.l2Page;
+  const pendingCount = DB.auditQueue.filter(a=>a.status==='pending'||a.status==='in_review').length;
+  const sb = document.getElementById('sidebar');
+  let html = `<div class="sidebar-section"><h5>导航</h5>
+    <div class="sidebar-item ${p==='dashboard'?'active':''}" onclick="goL2('dashboard')"><span class="emoji">◈</span> 档案终端</div></div>
+    <div class="sidebar-section"><h5>分类</h5>
+    ${l2Cats.map(c=>`<div class="sidebar-item ${p==='category'&&state.l2Category===c.id?'active':''}" onclick="goL2Cat('${c.id}')"><span class="emoji">${c.icon}</span> ${c.label}<span class="sidebar-count">${c.count}</span></div>`).join('')}</div>
+
+    <div class="sidebar-section"><h5>社区</h5>
+    <div class="sidebar-item ${p==='profile'?'active':''}" onclick="goL2('profile')"><span class="emoji">👤</span> 个人中心</div>
+    <div class="sidebar-item ${p==='leaderboard'?'active':''}" onclick="goL2('leaderboard')"><span class="emoji">🏆</span> 贡献排行</div>
+    <div class="sidebar-item ${p==='ugc'?'active':''}" onclick="goL2('ugc')"><span class="emoji">🎨</span> 创作广场<span class="sidebar-count">${DB.ugcWorks.length}</span></div></div>`;
+  if (DB.currentUser.orgRole) {
+    html += `<div class="sidebar-section"><h5>管理</h5>
+    <div class="sidebar-item ${p==='admin'?'active':''}" onclick="goL2('admin')"><span class="emoji">⚙️</span> 管理后台</div>
+    <div class="sidebar-item ${p==='audit'?'active':''}" onclick="goL2('audit')"><span class="emoji">📝</span> 审核队列<span class="sidebar-count alert">${pendingCount}</span></div></div>`;
+  }
+  html += `<div class="sidebar-section" style="margin-top:auto;padding-top:12px;border-top:1px solid var(--border)">
+    <div class="sidebar-item" onclick="switchLevel(1)"><span class="emoji">←</span> 返回沉浸浏览</div></div>`;
+  sb.innerHTML = html;
+}
+
+function renderMobileNav() {
+  const p = state.l2Page;
+  document.getElementById('mobileNav').innerHTML = `
+    <div class="mn-item ${p==='dashboard'?'active':''}" onclick="goL2('dashboard')"><span class="mn-icon">◈</span>终端</div>
+    <div class="mn-item ${p==='category'?'active':''}" onclick="goL2Cat('levels')"><span class="mn-icon">🗺️</span>分类</div>
+    <div class="mn-item ${p==='profile'?'active':''}" onclick="goL2('profile')"><span class="mn-icon">👤</span>我的</div>
+    <div class="mn-item ${p==='leaderboard'?'active':''}" onclick="goL2('leaderboard')"><span class="mn-icon">🏆</span>排行</div>
+    <div class="mn-item ${p==='ugc'?'active':''}" onclick="goL2('ugc')"><span class="mn-icon">🎨</span>创作</div>
+    ${DB.currentUser.orgRole ? `<div class="mn-item ${p==='admin'||p==='audit'?'active':''}" onclick="goL2('admin')"><span class="mn-icon">⚙️</span>管理</div>` : ''}`;
+}
+
+function goL2(page) { state.l2Page=page; renderL2(); }
+function goL2Cat(cat,theme) { state.l2Page='category'; state.l2Category=cat; state.l2ThemeFilter=theme||null; renderL2(); }
+function showL2Detail(id) { state.l2Page='detail'; state.l2DetailId=id; if(state.currentLevel===1) switchLevel(2); else renderL2(); }
+
+// --- Dashboard ---
+
+// ====== GUIDE PAGE: Beginner's Reading Route ======
+function renderGuide() {
+  const main = document.getElementById('l2Main');
+  const route = [
+    {id:'level-0', icon:'🏢', title:'Level 0 — 黄色走廊', desc:'你醒来的地方。无限延伸的办公空间，潮湿地毯和嗡鸣的荧光灯。所有流浪者的起点。', tag:'必读', tagClass:'fc-tag-green'},
+    {id:'level-1', icon:'🏭', title:'Level 1 — 穹顶仓库', desc:'从 Level 0 继续走，你会进入这个巨大的工业空间。这里比 Level 0 更危险，但也有更多资源。', tag:'推荐', tagClass:'fc-tag-blue'},
+    {id:'entity-smiler', icon:'😈', title:'实体：笑靥 (Smiler)', desc:'黑暗中两个发光的眼睛和一排牙齿。后室中最经典的威胁。记住：看到它，不要跑，慢慢后退。', tag:'必知', tagClass:'fc-tag-orange'},
+    {id:'entity-skin-stealer', icon:'👤', title:'实体：窃皮者 (Skin-Stealer)', desc:'能完美模仿人类外表的实体。如果有人看起来"不太对劲"，相信你的直觉。', tag:'警惕', tagClass:'fc-tag-orange'},
+    {id:'item-almond-water', icon:'💧', title:'物品：杏仁水', desc:'后室的硬通货。能解渴、充饥、缓解心理侵蚀。但千万别和液体痛苦搞混——它们看起来一模一样。', tag:'生存', tagClass:'fc-tag-green'},
+    {id:'group-meg', icon:'🏛️', title:'组织：M.E.G.', desc:'Major Explorer Group，后室中最大的人类组织。他们建前哨站、绘制地图、救助新来者。遇到他们是好事。', tag:'友好', tagClass:'fc-tag-green'},
+    {id:'level-fun', icon:'🎈', title:'Level Fun — 不要去', desc:'"COME PLAY WITH US =)" 如果你看到彩色气球和派对装饰，立刻转身。这里只有 Partygoer。', tag:'致命', tagClass:'fc-tag fc-tag-red'},
+  ];
+
+  const stepsHTML = route.map((r,i) => `
+    <div class="gd-step" onclick="showL2Detail('${r.id}')">
+      <div class="gd-step-num">${i+1}</div>
+      <div class="gd-step-icon">${r.icon}</div>
+      <div class="gd-step-body">
+        <div class="gd-step-head">
+          <span class="gd-step-title">${r.title}</span>
+          <span class="fc-tag ${r.tagClass}" style="font-size:10px;padding:1px 7px">${r.tag}</span>
+        </div>
+        <div class="gd-step-desc">${r.desc}</div>
+      </div>
+    </div>
+  `).join('');
+
+  main.innerHTML = `<div class="gd-page">
+    <div class="gd-back" onclick="goL2('dashboard')">&larr; 返回终端</div>
+    <div class="gd-hero">
+      <div class="gd-hero-icon">&#x1F5FA;</div>
+      <div>
+        <h1 class="gd-hero-title">新手生存指南</h1>
+        <div class="gd-hero-sub">5 分钟了解后室核心设定 · 从 Level 0 到关键实体</div>
+      </div>
+    </div>
+    <div class="gd-intro">
+      <p>你刚从现实世界卡出 (noclip)，来到了后室。别慌。</p>
+      <p>下面是一条精选的阅读路线，按照<strong>你最可能遇到的顺序</strong>排列。点击任何条目查看完整档案。</p>
+    </div>
+    <div class="gd-steps">${stepsHTML}</div>
+    <div class="gd-tip">
+      <strong>阅读完毕？</strong> 你现在已经了解了后室的基本生存法则。
+      可以去 <span class="gd-link" onclick="goL2Cat('levels')">浏览全部层级</span> 或 <span class="gd-link" onclick="goL2Cat('entities')">查看实体图鉴</span> 继续探索。
+    </div>
+  </div>`;
+}
+
+// ====== TRENDING PAGE: Hot Levels & Entities ======
+function renderTrending() {
+  const main = document.getElementById('l2Main');
+  // Mix levels + entities, sort by views
+  const allItems = [
+    ...DB.levels.map(l=>({...l, _type:'level', _icon:l.image||'?', _views:l.views||0})),
+    ...DB.entities.map(e=>({...e, _type:'entity', _icon:e.image||'?', _views:e.views||0}))
+  ].sort((a,b)=>b._views - a._views).slice(0,12);
+
+  const listHTML = allItems.map((item,i) => {
+    const rank = i+1;
+    const rankClass = rank<=3 ? 'td-rank-top' : '';
+    const typeLabel = item._type==='level' ? '层级' : '实体';
+    const dangerHTML = item._type==='level'
+      ? `<span style="color:${dangerColor(item.danger||0)}">${dangerLabel(item.danger||0)}</span>`
+      : `<span style="color:${threatColor(item.dangerLevel||'neutral')}">${item.dangerLevel==='lethal'?'致命':item.dangerLevel==='hostile'?'敌对':item.dangerLevel==='friendly'?'友好':'中立'}</span>`;
+    return `<div class="td-item" onclick="showL2Detail('${item.id}')">
+      <div class="td-rank ${rankClass}">${rank}</div>
+      <div class="td-icon">${item._icon}</div>
+      <div class="td-info">
+        <div class="td-name">${item.name}</div>
+        <div class="td-meta"><span class="td-type">${typeLabel}</span>${item.subtitle ? ' · '+item.subtitle : ''}</div>
+      </div>
+      <div class="td-right">
+        <div class="td-views">${formatNum(item._views)} 浏览</div>
+        <div class="td-danger">${dangerHTML}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  main.innerHTML = `<div class="td-page">
+    <div class="gd-back" onclick="goL2('dashboard')">&larr; 返回终端</div>
+    <div class="gd-hero">
+      <div class="gd-hero-icon">&#x1F525;</div>
+      <div>
+        <h1 class="gd-hero-title">热门层级 &amp; 实体</h1>
+        <div class="gd-hero-sub">抖音上出镜率最高的后室内容 · 按浏览量排序</div>
+      </div>
+    </div>
+    <div class="td-list">${listHTML}</div>
+    <div class="gd-tip">
+      想看全部？去 <span class="gd-link" onclick="goL2Cat('levels')">层级档案</span> 或 <span class="gd-link" onclick="goL2Cat('entities')">实体图鉴</span>
+    </div>
+  </div>`;
+}
+
+// ====== CREATOR GUIDE PAGE ======
+function renderCreatorGuide() {
+  const main = document.getElementById('l2Main');
+  main.innerHTML = `<div class="cg-page">
+    <div class="gd-back" onclick="goL2('dashboard')">&larr; 返回终端</div>
+    <div class="gd-hero">
+      <div class="gd-hero-icon">&#x270D;</div>
+      <div>
+        <h1 class="gd-hero-title">创作者指南</h1>
+        <div class="gd-hero-sub">让你的创意成为后室世界观的一部分</div>
+      </div>
+    </div>
+
+    <div class="cg-section">
+      <h2 class="cg-sh">后室是开放世界观</h2>
+      <p class="cg-text">后室的核心魅力在于它是一个<strong>集体创作的世界观</strong>。任何人都可以设计新层级、新实体、新物品——只要它符合社区的基本规则。你在抖音上看到的很多经典内容，都来自普通创作者。</p>
+    </div>
+
+    <div class="cg-section">
+      <h2 class="cg-sh">投稿流程</h2>
+      <div class="cg-steps">
+        <div class="cg-step"><div class="cg-step-n">1</div><div><strong>构思</strong><br>选择创作类型：层级 / 实体 / 物品。参考已有档案了解格式。</div></div>
+        <div class="cg-step"><div class="cg-step-n">2</div><div><strong>撰写</strong><br>按模板填写档案。层级需要环境描述、生存建议、出入口；实体需要行为模式、威胁等级。</div></div>
+        <div class="cg-step"><div class="cg-step-n">3</div><div><strong>提交</strong><br>在创作广场提交投稿，内容进入审核队列。</div></div>
+        <div class="cg-step"><div class="cg-step-n">4</div><div><strong>审核</strong><br>社区审核员会检查内容质量、设定一致性和原创性，给出通过/修改/驳回。</div></div>
+        <div class="cg-step"><div class="cg-step-n">5</div><div><strong>收录</strong><br>通过审核的内容正式进入档案库，标注为「创作者内容」。获赞足够可升级为「社区共识」。</div></div>
+      </div>
+    </div>
+
+    <div class="cg-section">
+      <h2 class="cg-sh">内容分级</h2>
+      <div class="cg-grades">
+        <div class="cg-grade"><span class="cg-grade-dot" style="background:var(--green)"></span><div><strong>核心设定</strong> — 经多方验证的高可信度档案，后室世界观的骨架。</div></div>
+        <div class="cg-grade"><span class="cg-grade-dot" style="background:var(--yellow)"></span><div><strong>社区共识</strong> — 被广泛接受但尚未完全验证，可能随新数据修正。</div></div>
+        <div class="cg-grade"><span class="cg-grade-dot" style="background:var(--blue)"></span><div><strong>创作者内容</strong> — 来自创作者的原创投稿。独立观点，不代表终端立场。</div></div>
+      </div>
+    </div>
+
+    <div class="cg-section">
+      <h2 class="cg-sh">写作建议</h2>
+      <ul class="cg-tips">
+        <li><strong>保持神秘感</strong> — 后室的魅力在于未知。不要解释一切，留下空白让读者想象。</li>
+        <li><strong>注重感官描写</strong> — 声音、气味、光线、温度。「嗡鸣的荧光灯」比「很亮」好 100 倍。</li>
+        <li><strong>尊重已有设定</strong> — 你的层级可以有新规则，但不要与核心设定矛盾。</li>
+        <li><strong>生存建议是关键</strong> — 读者代入的是流浪者视角。告诉他们怎么活。</li>
+        <li><strong>出入口要合理</strong> — 层级之间的连接是后室世界观的脉络。</li>
+      </ul>
+    </div>
+
+    <div class="gd-tip">
+      准备好了？去 <span class="gd-link" onclick="goL2('ugc')">创作广场</span> 开始你的第一篇投稿。
+    </div>
+  </div>`;
+}
+
+function renderL2Dashboard() {
+  const main = document.getElementById('l2Main');
+  const u = DB.currentUser;
+  const pendingCount = DB.auditQueue.filter(a=>a.status==='pending'||a.status==='in_review').length;
+  const dangerAvg = (DB.levels.reduce((s,l)=>s+(l.danger||0),0)/DB.levels.length).toFixed(1);
+  const lethalCount = DB.entities.filter(e=>e.dangerLevel==='lethal').length;
+  const hostileCount = DB.entities.filter(e=>e.dangerLevel==='hostile').length;
+
+  // Hot levels: sort by views, top 5
+  const hotLevels = [...DB.levels].sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,5);
+
+  // Featured UGC
+  const ugcAll = [...(DB.ugcContent||[])].sort((a,b)=>(b.likes||0)-(a.likes||0));
+  const featuredUGC = ugcAll.filter(x=>x.status==='featured').slice(0,4);
+  const displayUGC = featuredUGC.length >= 4 ? featuredUGC : ugcAll.slice(0,4);
+
+  // Feed
+  const feed = DB.activityFeed || [];
+  const feedHTML = feed.slice(0,6).map(f=>`<div class="hm-feed-row"><span class="hm-feed-time">${f.time}</span><span style="color:${f.accent}">${f.icon}</span><span class="hm-feed-src">[${f.source}]</span><span class="hm-feed-txt">${f.text}</span></div>`).join('');
+
+  // Hot levels HTML
+  const hotHTML = hotLevels.map(l=>`<div class="hm-hot-card" onclick="showL2Detail('${l.id}')">
+    <div class="hm-hot-icon">${l.image||'?'}</div>
+    <div class="hm-hot-info">
+      <div class="hm-hot-name">${l.name}</div>
+      <div class="hm-hot-sub">${l.subtitle||''}</div>
+    </div>
+    <div class="hm-hot-meta">
+      <span class="hm-hot-views">${formatNum(l.views||0)}</span>
+      <span class="hm-hot-danger" style="color:${dangerColor(l.danger||0)}">${dangerLabel(l.danger||0)}</span>
+    </div>
+  </div>`).join('');
+
+  // UGC cards
+  const ugcHTML = displayUGC.map(c=>`<div class="hm-ugc-card" onclick="showL2Detail('${c.id}')">
+    <div class="hm-ugc-cover">${c.cover||''}</div>
+    <div class="hm-ugc-body">
+      <div class="hm-ugc-title">${c.title}</div>
+      <div class="hm-ugc-author">@${c.author}</div>
+      <div class="hm-ugc-stats">${formatNum(c.likes||0)} 赞 · ${formatNum(c.comments||0)} 评论</div>
+    </div>
+  </div>`).join('');
+
+  // User achievements
+  const achvMap = {'first-fall':'初次坠落','first-read':'初次阅读','cartographer':'制图师','entity-spotter':'实体观察者','wiki-contributor':'Wiki 贡献者'};
+  const achvHTML = (u.achievements||[]).map(a=>`<span class="hm-achv">${achvMap[a]||a}</span>`).join('');
+
+  // Hot entity (most views)
+  const hotEntity = [...DB.entities].sort((a,b)=>(b.views||0)-(a.views||0))[0];
+
+  main.innerHTML = `<div class="hm-page">
+
+    <!-- Header -->
+    <div class="hm-header">
+      <div class="hm-header-top">
+        <div>
+          <h1 class="hm-title">后室档案终端</h1>
+          <div class="hm-subtitle">Backrooms Archive Terminal</div>
+        </div>
+        <div class="hm-header-status"><span class="hm-dot"></span><span>运行中</span></div>
+      </div>
+      <div class="hm-header-meta">
+        数据来源: M.E.G. / B.N.T.G. / 独立流浪者 / 截获信号 · 本终端不隶属于任何组织
+      </div>
+    </div>
+
+    <!-- Two Column Layout -->
+    <div class="hm-cols">
+      <div class="hm-col-main">
+
+        <!-- World Intro -->
+        <div class="hm-section">
+          <h2 class="hm-sh">什么是后室</h2>
+          <div class="hm-intro">
+            <p>当现实的地面突然变得不再可靠，你踩穿了它。没有预兆，没有过渡，你从正常的世界<strong>卡出 (noclip)</strong> 进入了一个不应该存在的空间体系。</p>
+            <p>这里被称为<strong>后室 (The Backrooms)</strong>——一个由无数异常空间拼接而成的无限迷宫。它有自己的生态法则：空间被称为<em>层级</em>，生物被称为<em>实体</em>，散落的资源是<em>物品</em>，而幸存者自发形成了<em>组织</em>。</p>
+            <p>没人知道后室从哪里来，也没人知道它为什么存在。唯一确定的是——你现在在这里，而这份档案可能是你活下去的关键。</p>
+          </div>
+        </div>
+
+        <!-- Feature Cards (2x2 grid) -->
+        <div class="hm-section">
+          <div class="fc-grid">
+
+            <div class="fc-card" onclick="goL2('guide')">
+              <div class="fc-icon">&#x1F5FA;</div>
+              <span class="fc-tag fc-tag-green">新手推荐</span>
+              <div class="fc-title">从零开始了解后室</div>
+              <div class="fc-desc">一份 5 分钟的精选阅读路线。从 Level 0 到核心实体，我们帮你安排好了顺序，不会迷路。</div>
+              <div class="fc-link">进入新手指南 &rarr;</div>
+            </div>
+
+            <div class="fc-card" onclick="goL2('trending')">
+              <div class="fc-icon">&#x1F525;</div>
+              <span class="fc-tag fc-tag-orange">抖音热门</span>
+              <div class="fc-title">热门层级 &amp; 实体</div>
+              <div class="fc-desc">抖音上出镜率最高的后室内容全在这——Level !、Partygoer、泳池房间......找到你刷到过的那个。</div>
+              <div class="fc-link">查看热门内容 &rarr;</div>
+            </div>
+
+            <div class="fc-card" onclick="goL2('creator-guide')">
+              <div class="fc-icon">&#x270D;</div>
+              <span class="fc-tag fc-tag-blue">创作者</span>
+              <div class="fc-title">贡献你的层级</div>
+              <div class="fc-desc">后室是所有人共同创造的世界观。了解投稿规则和写作模板，让你的创意成为后室的一部分。</div>
+              <div class="fc-link">查看创作指南 &rarr;</div>
+            </div>
+
+            <div class="fc-card" onclick="goL2Cat('groups')">
+              <div class="fc-icon">&#x1F4E1;</div>
+              <span class="fc-tag fc-tag-purple">实时</span>
+              <div class="fc-title">组织与阵营</div>
+              <div class="fc-desc">M.E.G. 建前哨站、B.N.T.G. 跑贸易、失落一族已经疯了——了解后室中的所有势力和立场。</div>
+              <div class="fc-link">查看组织情报 &rarr;</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="hm-section">
+          <div class="fc-stats-bar">
+            <div class="fc-stat"><div class="fc-stat-num">${DB.levels.length}+</div><div class="fc-stat-label">已收录层级</div></div>
+            <div class="fc-stat"><div class="fc-stat-num">${DB.entities.length}+</div><div class="fc-stat-label">已编目实体</div></div>
+            <div class="fc-stat"><div class="fc-stat-num">${DB.items.length}+</div><div class="fc-stat-label">物品 &amp; 物资</div></div>
+            <div class="fc-stat"><div class="fc-stat-num">${DB.groups.length}+</div><div class="fc-stat-label">已知团体</div></div>
+            <div class="fc-stat"><div class="fc-stat-num">1.2K</div><div class="fc-stat-label">贡献者</div></div>
+          </div>
+        </div>
+
+        <!-- Hot Levels -->
+        <div class="hm-section">
+          <h2 class="hm-sh">热点层级 <span class="hm-sh-badge">HOT</span></h2>
+          <div class="hm-hot-list">${hotHTML}</div>
+        </div>
+
+        <!-- Trending UGC -->
+        <div class="hm-section">
+          <h2 class="hm-sh">热门二创 <span class="hm-sh-badge hm-sh-badge-pink">抖音</span></h2>
+          <div class="hm-ugc-grid">${ugcHTML}</div>
+          <div class="hm-ugc-more" onclick="goL2('ugc')">查看全部创作 &rarr;</div>
+        </div>
+
+        <!-- Signal Feed -->
+        <div class="hm-section">
+          <h2 class="hm-sh">近期信号</h2>
+          <div class="hm-feed">${feedHTML}</div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="hm-col-side">
+
+        <!-- User Card -->
+        <div class="hm-user-card">
+          <div class="hm-user-banner"></div>
+          <div class="hm-user-body">
+            <div class="hm-user-avatar">${u.avatar||''}</div>
+            <div class="hm-user-name">${u.name}</div>
+            <div class="hm-user-role">Lv.${u.level} ${u.levelName||''}</div>
+            <div class="hm-user-achvs">${achvHTML}</div>
+            <div class="hm-user-stats">
+              <div class="hm-us"><div class="hm-us-num">${u.stats.entriesCreated||0}</div><div class="hm-us-label">创建</div></div>
+              <div class="hm-us"><div class="hm-us-num">${u.stats.editsAccepted||0}</div><div class="hm-us-label">编辑</div></div>
+              <div class="hm-us"><div class="hm-us-num">${u.stats.daysActive||0}</div><div class="hm-us-label">活跃天</div></div>
+              <div class="hm-us"><div class="hm-us-num">${u.stats.articlesRead||0}</div><div class="hm-us-label">阅读</div></div>
+            </div>
+            <div class="hm-user-actions">
+              <div class="hm-user-btn" onclick="goL2('profile')">个人主页</div>
+              ${pendingCount>0?'<div class="hm-user-btn hm-user-btn-alert" onclick="goL2(\\\'audit\\\')">待审核 '+pendingCount+'</div>':''}
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Nav -->
+        <div class="hm-side-nav">
+          <h3 class="hm-side-title">快速访问</h3>
+          <div class="hm-qnav" onclick="goL2Cat('levels')">&#x1F5FA; 浏览层级</div>
+          <div class="hm-qnav" onclick="goL2Cat('entities')">&#x1F441; 实体报告</div>
+          <div class="hm-qnav" onclick="goL2Cat('items')">&#x1F392; 物品清单</div>
+          <div class="hm-qnav" onclick="goL2Cat('groups')">&#x1F4FB; 组织情报</div>
+          <div class="hm-qnav" onclick="goL2('ugc')">&#x1F3A8; 创作广场</div>
+          ${u.orgRole?'<div class="hm-qnav" onclick="goL2(\\\'admin\\\')">&#x2699; 管理后台</div>':''}
+        </div>
+
+        <!-- Notice -->
+        <div class="hm-side-notice">
+          <h3 class="hm-side-title">公告</h3>
+          <div class="hm-notice-text">后室档案库已收录 <strong>${DB.levels.length}</strong> 个层级、<strong>${DB.entities.length}</strong> 种实体。欢迎所有流浪者贡献你的探索记录。</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>`;
+}
+
+function zoneCard(e) {
+  const hasDanger = e.danger !== undefined;
+  return `<div class="zone-card" onclick="showL2Detail('${e.id}')"><div class="zc-top theme-${e.theme}"><div class="zc-bg"></div>${hasDanger?`<span class="rc-danger" style="background:${dangerColor(e.danger)}22;color:${dangerColor(e.danger)};font-size:10px;position:absolute;top:4px;right:4px;padding:1px 6px;border-radius:4px">${dangerLabel(e.danger)}</span>`:''}${e.image}</div>
+    <div class="zc-body"><h4>${e.name}</h4><div class="zc-sub">${e.subtitle||''}</div></div></div>`;
+}
+
+// --- Category ---
+function renderL2Category() {
+  const main = document.getElementById('l2Main');
+  const cat = state.l2Category;
+  let data=[], title='';
+  if (cat==='levels') { data=DB.levels.map(e=>({...e,type:'level'})); title='🗺️ 全部层级'; }
+  else if (cat==='entities') { data=DB.entities.map(e=>({...e,type:'entity'})); title='👁️ 全部实体'; }
+  else if (cat==='items') { data=DB.items.map(e=>({...e,type:'item'})); title='🎒 全部物品'; }
+  else if (cat==='groups') { data=DB.groups.map(e=>({...e,type:'group'})); title='👥 全部组织'; }
+
+  if (cat==='levels') {
+    // Sort levels: numeric first by number, then special ones
+    data.sort((a,b) => {
+      const na = parseInt(a.id.replace('level-','')) || 9999;
+      const nb = parseInt(b.id.replace('level-','')) || 9999;
+      return na - nb;
+    });
+
+    // Find gaps and insert "未探索" placeholders
+    const rendered = [];
+    let lastNum = -1;
+    data.forEach(e => {
+      const num = parseInt(e.id.replace('level-',''));
+      if (!isNaN(num) && num <= 11) {
+        // Insert unexplored placeholders for gaps
+        for (let g = lastNum + 1; g < num; g++) {
+          if (lastNum >= 0) {
+            rendered.push(`<div class="zone-card" style="opacity:.4;border-style:dashed;cursor:default"><div class="zc-top" style="background:var(--bg3)"><span style="font-size:20px;color:var(--text3)">?</span></div><div class="zc-body"><h4 style="color:var(--text3)">Level ${g}</h4><div class="zc-sub" style="font-style:italic">未探索 — 等待你的记录</div></div></div>`);
+          }
+        }
+        lastNum = num;
+      }
+      rendered.push(zoneCard(e));
+    });
+
+    main.innerHTML = `<button class="back-btn" onclick="goL2('dashboard')">← 返回终端</button>
+      <h1 class="page-title">${title}</h1><p class="page-sub">${data.length} 个已记录层级（按编号排列）</p>
+      <div class="zone-grid">${rendered.join('')}</div>`;
+  } else {
+    main.innerHTML = `<button class="back-btn" onclick="goL2('dashboard')">← 返回</button>
+      <h1 class="page-title">${title}</h1><p class="page-sub">${data.length} 个词条</p>
+      <table class="data-table"><thead><tr><th>名称</th><th>分级</th>${cat==='entities'?'<th>威胁</th>':''}${cat==='groups'?'<th>立场</th>':''}<th>浏览</th><th>收藏</th></tr></thead><tbody>
+      ${data.map(e=>`<tr><td><div class="name-cell" onclick="showL2Detail('${e.id}')">${e.image} ${e.name} <span style="color:var(--text3);font-size:12px">${e.subtitle||''}</span></div></td>
+      <td><span class="badge ${gradeClass(e.grade)}">${gradeLabel(e.grade)}</span></td>
+      ${cat==='entities'?`<td style="color:${threatColor(e.dangerLevel)}">${e.dangerLevel||'-'}</td>`:''}
+      ${cat==='groups'?`<td style="color:${threatColor(e.stance)}">${e.stance||'-'}</td>`:''}
+      <td>${formatNum(e.views||0)}</td><td>${formatNum(e.bookmarks||0)}</td></tr>`).join('')}</tbody></table>`;
+  }
+  renderSidebar(); renderMobileNav();
+}
+
+// --- Detail ---
+function renderL2Detail(id) {
+  const e = findEntry(id); if(!e) return;
+  const main = document.getElementById('l2Main');
+  const hasDims = !!e.dims;
+  let infoRows = `<div class="info-row"><span class="k">内容分级</span><span class="v"><span class="badge ${gradeClass(e.grade)}">${gradeLabel(e.grade)}</span></span></div>`;
+  if (e.danger!==undefined) infoRows+=`<div class="info-row"><span class="k">危险等级</span><span class="v" style="color:${dangerColor(e.danger)}">${e.danger}/5 · ${dangerLabel(e.danger)}</span></div>`;
+  if (e.dangerLevel) infoRows+=`<div class="info-row"><span class="k">威胁级别</span><span class="v">${e.dangerLevel}</span></div>`;
+  if (e.stance) infoRows+=`<div class="info-row"><span class="k">立场</span><span class="v">${e.stance}</span></div>`;
+  if (e.views) infoRows+=`<div class="info-row"><span class="k">浏览量</span><span class="v">${formatNum(e.views)}</span></div>`;
+
+  let dimsHTML='';
+  if(hasDims){const dn={entity:'实体威胁',env:'环境稳定',resource:'资源丰度',nav:'导航难度',psych:'心理侵蚀'},dc={entity:'#ef4444',env:'#4ade80',resource:'#60a5fa',nav:'#f5d76e',psych:'#a78bfa'};
+    dimsHTML=`<div style="margin-top:12px"><h4 style="font-size:12px;color:var(--text3);margin-bottom:8px">五维安全评估</h4><div class="radar-bars">${Object.keys(dn).map(k=>`<div class="radar-bar"><span class="label">${dn[k]}</span><div class="track"><div class="fill" style="width:${(e.dims[k]/5)*100}%;background:${dc[k]}"></div></div><span class="val">${e.dims[k]}/5</span></div>`).join('')}</div></div>`;}
+
+  let connHTML='';
+  [{k:'exits',t:'出口连接',m:'exits'},{k:'entities_here',t:'出没实体',m:'ref'},{k:'habitat',t:'出没层级',m:'ref'},{k:'found_in',t:'发现地点',m:'ref'},{k:'bases',t:'据点位置',m:'ref'}].forEach(s=>{
+    const arr=e[s.k];if(!arr||!arr.length)return;
+    connHTML+=`<div class="conn-section"><h4>${s.t}</h4>`;
+    arr.forEach(item=>{if(s.m==='ref'){const r=findEntry(item);if(r)connHTML+=`<span class="conn-chip" onclick="showL2Detail('${r.id}')">${r.image} ${r.name}</span>`;}
+    else if(typeof item==='object'&&item.target){const r=findEntry(item.target);if(r)connHTML+=`<span class="conn-chip" onclick="showL2Detail('${r.id}')">${r.image} ${r.name} — ${item.desc}</span>`;}});
+    connHTML+=`</div>`;
+  });
+
+  const backCat = e.type==='level'?'levels':e.type==='entity'?'entities':e.type==='item'?'items':'groups';
+  main.innerHTML = `<button class="back-btn" onclick="goL2Cat('${backCat}')">← 返回列表</button>
+    <div class="detail-page"><div class="detail-hero"><div class="icon">${e.image}</div><div><h1>${e.name}</h1><div class="sub">${e.subtitle||''}</div></div></div>
+    <div class="detail-info">${infoRows}${dimsHTML}</div>
+    <div class="mw-summary" style="margin:0 0 20px">${e.summary}</div>
+    <div class="detail-content">${mdToHTML(e.desc)}</div>${connHTML}</div>`;
+  renderSidebar(); renderMobileNav();
+}
+
+// --- Profile ---
+function renderProfile() {
+  const u = DB.currentUser, main = document.getElementById('l2Main');
+  const myAchievements = DB.achievements.filter(a => u.achievements.includes(a.id));
+
+  main.innerHTML = `<button class="back-btn" onclick="goL2('dashboard')">← 返回终端</button>
+    <div class="prof-hero">
+      <div class="prof-hero-bg"></div>
+      <div class="prof-hero-body">
+        <div class="prof-avatar">${u.avatar || '👤'}</div>
+        <div class="prof-info">
+          <div class="prof-name">${u.name} <span class="level-badge lv${u.level}">Lv.${u.level} ${u.levelName}</span>
+          ${u.orgRole?`<span class="badge badge-core">${u.orgRole}</span>`:''}</div>
+          <div class="prof-meta">活跃 ${u.stats.daysActive} 天 · 共加入社区 10 个组织</div>
+        </div>
+        <div class="prof-likes">👍 赞同 962</div>
+      </div>
+      ${u.orgRole?`<div class="prof-admin-link" onclick="goL2('admin')">管理员工作台 →</div>`:''}
+    </div>
+
+    <div class="prof-stats">
+      <div class="prof-stat"><div class="prof-stat-n">${u.stats.entriesCreated}</div><div class="prof-stat-l">有效编辑</div></div>
+      <div class="prof-stat"><div class="prof-stat-n">${u.stats.editsAccepted}</div><div class="prof-stat-l">编辑通过</div></div>
+      <div class="prof-stat"><div class="prof-stat-n">${u.stats.suggestionsMade}</div><div class="prof-stat-l">编辑请求</div></div>
+      <div class="prof-stat"><div class="prof-stat-n">${u.stats.articlesRead}</div><div class="prof-stat-l">条目阅读</div></div>
+    </div>
+
+    <div class="prof-tabs">
+      <div class="prof-tab active" onclick="profTab(this,'contrib')">社区贡献</div>
+      <div class="prof-tab" onclick="profTab(this,'fav')">我的收藏</div>
+    </div>
+    <div id="profTabPane">${profContrib()}</div>
+  `;
+}
+
+function profTab(el, t) {
+  document.querySelectorAll('.prof-tab').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('profTabPane').innerHTML = t==='fav' ? profFav() : profContrib();
+}
+
+function profContrib() {
+  const entries = DB.levels.slice(0,3);
+  return `<div class="prof-contrib-stats"><span class="prof-cs-item">有效编辑 8</span><span class="prof-cs-item">编辑请求 12</span></div>` +
+    entries.map(e => `<div class="prof-card" onclick="showL2Detail('${e.id}')">
+      <div class="prof-card-top">
+        <div><div class="prof-card-name">${e.name} — ${e.subtitle}</div>
+        <div class="prof-card-meta">层级档案 · 编辑时间: 2026-04-15</div></div>
+        <span class="prof-card-btn">查看</span>
+      </div>
+      <div class="prof-card-desc">编辑内容：<br>"${e.summary.slice(0,100)}…"</div>
+    </div>`).join('');
+}
+
+function profFav() {
+  const u = DB.currentUser;
+  const items = u.bookmarks.map(id=>findEntry(id)).filter(Boolean);
+  if (!items.length) return '<div style="padding:30px;text-align:center;color:var(--text3)">暂无收藏</div>';
+  return items.map(e => `<div class="prof-card" onclick="showL2Detail('${e.id}')">
+    <div class="prof-card-top">
+      <span class="prof-card-icon">${e.image}</span>
+      <div><div class="prof-card-name">${e.name}</div><div class="prof-card-meta">${e.subtitle||''}</div></div>
+      <span class="prof-card-btn">查看</span>
+    </div>
+  </div>`).join('');
+}
+
+
+// --- Admin ---
+function renderAdmin() {
+  const main = document.getElementById('l2Main');
+  const u = DB.currentUser;
+  const pendingCount = DB.auditQueue.filter(a=>a.status==='pending'||a.status==='in_review').length;
+  const editCount = DB.auditQueue.filter(a=>a.type==='edit').length;
+  const majorCount = DB.auditQueue.filter(a=>a.priority==='high').length;
+
+  main.innerHTML = `<button class="back-btn" onclick="goL2('dashboard')">← 返回终端</button>
+    <div class="adm-hero">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:28px">${u.avatar||'👤'}</span>
+        <div>
+          <div style="font-size:15px;font-weight:600;color:var(--text)">${u.name} <span class="badge badge-core">${u.orgRole}</span>
+            <span style="margin-left:8px;font-size:12px;color:var(--text3);font-weight:400;cursor:pointer">编辑</span></div>
+          <div style="font-size:12px;color:var(--text3);margin-top:2px">成为管理员 4 个月</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text3);margin-top:10px;line-height:1.6">
+        职责：负责情报校勘与审查监武，美化网站管理工作，以及协调各事项
+      </div>
+    </div>
+
+    <div class="adm-section">
+      <div class="adm-section-hd"><span>待审核内容</span><span class="adm-link" onclick="goL2('audit')">查看 ›</span></div>
+      <div class="adm-sum-grid">
+        <div class="adm-sum" onclick="goL2('audit')"><div class="adm-sum-n">${pendingCount}</div><div class="adm-sum-l">新建词条</div></div>
+        <div class="adm-sum" onclick="goL2('audit')"><div class="adm-sum-n">${editCount}</div><div class="adm-sum-l">词条修改</div></div>
+        <div class="adm-sum" onclick="goL2('audit')"><div class="adm-sum-n">${majorCount}</div><div class="adm-sum-l">重大修改</div></div>
+      </div>
+    </div>
+
+    <div class="adm-section">
+      <div class="adm-section-hd">WIKI 结构管理</div>
+      <div class="adm-tools">
+        <div class="adm-tool" onclick="goL2Cat('levels')"><span>🗺️</span><span>词条版图管理</span></div>
+        <div class="adm-tool" onclick="goL2Cat('entities')"><span>📂</span><span>页面档案管理</span></div>
+      </div>
+    </div>
+
+    <div class="adm-section">
+      <div class="adm-section-hd">社区管理</div>
+      <div class="adm-tools">
+        <div class="adm-tool" onclick="goL2('leaderboard')"><span>👥</span><span>社区成员管理</span></div>
+        <div class="adm-tool" onclick="goL2('ugc')"><span>⭐</span><span>荣誉体系管理</span></div>
+      </div>
+    </div>
+
+    <div class="adm-section">
+      <div class="adm-section-hd">组织架构</div>
+      <div class="adm-org">
+        ${DB.orgMembers.map(m=>`<div class="adm-org-row">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:18px">${m.avatar||'👤'}</span>
+            <div><div style="font-size:13px;font-weight:500;color:var(--text)">${m.name}</div>
+            <div style="font-size:11px;color:var(--text3)">${m.role}</div></div>
+          </div>
+          <span class="badge ${m.tier==='统筹管理者'?'badge-core':m.tier==='体系运维者'?'badge-consensus':'badge-creator'}">${m.tier}</span>
+        </div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+
+// --- Audit ---
+function renderAudit() {
+  const main = document.getElementById('l2Main');
+  const queue = DB.auditQueue;
+  const pending = queue.filter(a=>a.status==='pending'||a.status==='in_review');
+  const resolved = queue.filter(a=>a.status==='approved'||a.status==='rejected');
+  const typeLabel = {new_entry:'新建词条',edit:'词条修改',suggestion:'修改建议'};
+  const prioLabel = {high:'重大修改',normal:'普通',low:'次要'};
+  const prioClass = {high:'badge-core',normal:'badge-consensus',low:'badge-creator'};
+
+  function aCard(a) {
+    const isPending = a.status==='pending'||a.status==='in_review';
+    return `<div class="aud-card">
+      <div class="aud-card-hd">
+        <span class="badge ${prioClass[a.priority]}">${prioLabel[a.priority]}</span>
+        <span class="aud-type">${typeLabel[a.type]}</span>
+        <span class="aud-date">${a.submittedAt}</span>
+      </div>
+      <div class="aud-title">${a.title}</div>
+      <div class="aud-meta">提交者: ${a.author}${a.target?' · 目标: '+a.target:''}</div>
+      <div class="aud-preview">${a.category==='level'?'层级档案':a.category==='entity'?'实体档案':'其他'} · ${a.type==='new_entry'?'全新条目等待审核':'修改已有条目内容'}</div>
+      ${isPending?`<div class="aud-actions">
+        <button class="aud-btn aud-reject" onclick="auditAction('${a.id}','rejected')">驳回</button>
+        <button class="aud-btn aud-approve" onclick="auditAction('${a.id}','approved')">通过</button>
+      </div>`:`<div class="aud-resolved">${a.status==='approved'?'✓ 已通过':'✗ 已驳回'}${a.reviewer?' · 审核人: '+a.reviewer:''}</div>`}
+    </div>`;
+  }
+
+  main.innerHTML = `<button class="back-btn" onclick="goL2('admin')">← 返回工作台</button>
+    <h1 class="page-title">📝 待审核内容列表</h1>
+    <div class="aud-tabs">
+      <div class="prof-tab active">内容审核</div>
+      <div class="prof-tab">社区版本管理</div>
+    </div>
+    <div class="aud-filter">
+      <span class="aud-filter-btn active">新建词条 ${pending.filter(a=>a.type==='new_entry').length}</span>
+      <span class="aud-filter-btn">词条修改 ${pending.filter(a=>a.type==='edit').length}</span>
+      <span class="aud-filter-btn">重大修改 ${pending.filter(a=>a.priority==='high').length}</span>
+      <span class="aud-filter-btn">全部</span>
+    </div>
+    ${pending.length?`<div class="aud-list">${pending.map(aCard).join('')}</div>`:'<div style="padding:40px;text-align:center;color:var(--text3)">暂无待审核内容</div>'}
+    ${resolved.length?`<h3 style="font-size:14px;margin:20px 0 10px;color:var(--text2)">已处理</h3><div class="aud-list">${resolved.map(aCard).join('')}</div>`:''}
+  `;
+}
+
+
+function auditAction(id, action) {
+  const a = DB.auditQueue.find(x=>x.id===id);
+  if (a) { a.status = action; a.reviewer = DB.currentUser.name; showToast(`${action==='approved'?'✓ 已通过':'✗ 已退回'}: ${a.title}`); renderAudit(); renderSidebar(); renderMobileNav(); }
+}
+
+// --- Leaderboard ---
+function renderLeaderboard() {
+  const main = document.getElementById('l2Main');
+  const lb = DB.leaderboard;
+  const top3 = lb.slice(0,3);
+  const rest = lb.slice(3);
+  main.innerHTML = `<button class="back-btn" onclick="goL2('dashboard')">← 返回终端</button>
+    <h1 class="page-title">🏆 社区贡献排行</h1><p class="page-sub">以贡献度排名的活跃成员</p>
+    <div class="podium">${top3.map((u,i)=>`<div class="podium-card ${i===0?'first':''}"><div class="pc-badge">${u.badge||'🏅'}</div><div class="pc-name">${u.name}</div>
+      <span class="level-badge lv${u.level}">Lv.${u.level} ${u.levelName}</span>
+      <div class="pc-stats" style="margin-top:6px">${u.entries} 条目 · ${u.edits} 编辑</div></div>`).join('')}</div>
+    <table class="data-table"><thead><tr><th>#</th><th>用户</th><th>等级</th><th>条目</th><th>编辑</th></tr></thead><tbody>
+    ${rest.map(u=>`<tr class="${u.name===DB.currentUser.name?'lb-my-row':''}"><td>${u.rank}</td><td>${u.name}${u.name===DB.currentUser.name?' ← 你':''}</td>
+    <td><span class="level-badge lv${u.level}">Lv.${u.level}</span></td><td>${u.entries}</td><td>${u.edits}</td></tr>`).join('')}</tbody></table>`;
+}
+
+
+// --- UGC / 创作广场 ---
+function renderUGC() {
+  const main = document.getElementById('l2Main');
+  const works = DB.ugcWorks;
+  const featured = works.filter(w=>w.status==='featured');
+  const approved = works.filter(w=>w.status==='approved');
+  const pending = works.filter(w=>w.status==='pending_review');
+  const typeIcon = {video:'🎬',audio:'🎵',article:'📝',image:'🖼️'};
+  const statusLabel = {featured:'精选推荐',approved:'已发布',pending_review:'审核中'};
+  const statusClass = {featured:'badge-core',approved:'badge-consensus',pending_review:'badge-creator'};
+
+  function ugcCard(w) {
+    const relEntry = findEntry(w.tag);
+    return `<div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .2s;cursor:pointer" onclick="openUGCDetail('${w.id}')">
+      <div style="height:80px;display:flex;align-items:center;justify-content:center;font-size:36px;background:linear-gradient(135deg,var(--bg4),var(--bg2))">${w.cover}</div>
+      <div style="padding:12px">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+          <span style="font-size:14px">${typeIcon[w.type]||'📄'}</span>
+          <span class="badge ${statusClass[w.status]}">${statusLabel[w.status]}</span>
+          ${relEntry?`<span style="font-size:11px;color:var(--text3)">关联: ${relEntry.name}</span>`:''}
+        </div>
+        <h4 style="font-size:14px;color:var(--text);margin-bottom:4px;line-height:1.4">${w.title}</h4>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:6px">by ${w.author} · <span class="level-badge lv${w.authorLevel}" style="font-size:10px;padding:1px 6px">Lv.${w.authorLevel}</span></div>
+        <div style="font-size:12px;color:var(--text2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.5">${w.desc}</div>
+        <div style="display:flex;gap:10px;margin-top:8px;font-size:11px;color:var(--text3)"><span>❤️ ${formatNum(w.likes)}</span><span>💬 ${w.comments}</span><span>📅 ${w.createdAt}</span></div>
+      </div>
+    </div>`;
+  }
+
+  main.innerHTML = `<button class="back-btn" onclick="goL2('dashboard')">← 返回终端</button>
+    <h1 class="page-title">🎨 创作广场</h1>
+    <p class="page-sub">来自抖音创作者的后室二创作品 · ${works.length} 部作品</p>
+    <div class="admin-banner" style="border-color:rgba(167,139,250,.2);background:rgba(167,139,250,.06);color:var(--purple)">✨ 抖音创作者可通过 Wiki 投稿入口提交二创作品，审核通过后将在此展示并关联至对应词条</div>
+    ${featured.length?`<h3 style="font-size:15px;margin:20px 0 12px;display:flex;align-items:center;gap:6px"><span>⭐</span> 精选推荐</h3>
+    <div class="zone-grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:24px">${featured.map(ugcCard).join('')}</div>`:''}
+    ${approved.length?`<h3 style="font-size:15px;margin:0 0 12px;display:flex;align-items:center;gap:6px"><span>✅</span> 社区作品</h3>
+    <div class="zone-grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:24px">${approved.map(ugcCard).join('')}</div>`:''}
+    ${pending.length?`<h3 style="font-size:15px;margin:0 0 12px;display:flex;align-items:center;gap:6px"><span>⏳</span> 审核中</h3>
+    <div class="zone-grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:24px">${pending.map(ugcCard).join('')}</div>`:''}`;
+}
+
+function openUGCDetail(id) {
+  const w = DB.ugcWorks.find(x=>x.id===id);
+  if (!w) return;
+  const relEntry = findEntry(w.tag);
+  const typeIcon = {video:'🎬',audio:'🎵',article:'📝',image:'🖼️'};
+  const sheet = document.getElementById('modalSheet');
+  sheet.innerHTML = `
+    <button class="modal-close" onclick="closeModal(event)">✕</button>
+    <div class="mw-stamp">抖音创作者二创作品 // UGC</div>
+    <div class="mw-header"><div class="mw-icon">${w.cover}</div><div><div class="mw-name">${w.title}</div><div class="mw-sub">${typeIcon[w.type]||'📄'} ${w.type} · by ${w.author} (Lv.${w.authorLevel})</div></div></div>
+    <div class="mw-summary">${w.desc}</div>
+    <div class="mw-section">
+      <h4>作品数据</h4>
+      <div style="display:flex;gap:16px;font-size:14px;color:var(--text2)">
+        <span>❤️ ${formatNum(w.likes)} 赞</span>
+        <span>💬 ${w.comments} 评论</span>
+        <span>📅 ${w.createdAt}</span>
+      </div>
+    </div>
+    ${relEntry?`<div class="conn-section"><h4>关联词条</h4><span class="conn-chip" onclick="event.stopPropagation();closeModal(event);showL2Detail('${relEntry.id}')">${relEntry.image} ${relEntry.name}</span></div>`:''}
+    <div class="mw-footer">作品来源: 抖音 | 投稿状态: ${w.status}</div>`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ====== INIT ======
+function init() {
+  const hash = window.location.hash;
+  if (hash === '#workspace' || hash === '#l2') {
+    skipToCorridorDirect();
+    switchLevel(2);
+  } else if (hash === '#skip') {
+    skipToCorridorDirect();
+  } else {
+    startFall();
+  }
+}
+init();
+
+</script>
+</body>
+</html>
